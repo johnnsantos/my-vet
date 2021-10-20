@@ -1,6 +1,6 @@
 export const colors = {
 	header: '#613CB0',
-	backgroundDefault: '#E5E5E5',
+	backgroundDefault: '#F5F8FD',
 	backgroundPaper: '#FFFFFF',
 	primaryButton: '#6B48FF',
 	secondaryButton: '#FFFFFF',
