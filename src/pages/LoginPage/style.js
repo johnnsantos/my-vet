@@ -4,5 +4,5 @@ import theme from "../../utils/theme";
 
 export const StyledGrid = styled(Grid)`
 background-color: ${theme.backgroundDefault};
-height: 100vh;
+height: calc(100vh - 3px);
 `
