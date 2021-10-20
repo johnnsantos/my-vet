@@ -1,6 +1,12 @@
+import { StyledPaper } from "./style"
+
 const DashboardMenu = () => {
 	return (
-		<h1>menu</h1>
+		<StyledPaper elevation={4}>
+			<div className="wrapper">
+				<span>Meus pets</span>
+			</div>
+		</StyledPaper>
 	)
 }
 
