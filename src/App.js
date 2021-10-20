@@ -1,6 +1,12 @@
+import { BrowserRouter } from "react-router-dom";
+import Routes from './routes'
+
 const App = () => {
   return (
-    <h1>oi</h1>
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
+
   );
 }
 
