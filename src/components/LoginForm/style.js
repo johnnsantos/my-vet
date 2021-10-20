@@ -13,6 +13,10 @@ flex-flow: column nowrap;
 	margin-bottom: 3vh;
 	max-width: 190px;
 	min-width: 100px;
+	@media screen and (max-width: 950px) {
+	margin: 3vh auto;
+	display: flex;
+}
 }
 }
 
@@ -61,7 +65,8 @@ flex-flow: column nowrap;
 align-items: center;
 justify-content: space-between;
 width: 100%;
-height: 11vh;
+height: 15vh;
+max-height: 100px;
 margin-top: 5vh;
 @media screen and (max-width: 950px) {
 	min-height: 100px;
@@ -70,8 +75,7 @@ margin-top: 5vh;
 }
 
 .support {
-/* display: flex; */
-align-self: center;
+text-align: center;
 margin-top: 5vh;
 font-weight: 500;
 }
@@ -84,6 +88,7 @@ flex-flow: row nowrap;
 align-items: flex-start;
 @media screen and (max-width: 950px) {
 	flex-flow: column;
+	padding: 50px 20px 50px;
 }
 `
 
