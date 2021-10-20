@@ -6,11 +6,11 @@ const LoginForm = () => {
 	return (
 		<CardWrapper>
 			<div className='form-header'>
-				<img className='login-logo' src={logoFull} />
+				<img alt='Guia Vet' className='login-logo' src={logoFull} />
 			</div>
 			<StyledCard>
 				<div className="promo">
-					<img className='dog-image' src={dog} />
+					<img alt='Saúde do Pet' className='dog-image' src={dog} />
 					<span>
 						Nunca mais se esqueça das datas mais importantes
 						para a saúde do seu pet!

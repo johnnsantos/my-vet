@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Card, Button, OutlinedInput } from "@material-ui/core";
-import { } from '@material-ui/core'
 import colors from "../../utils/colors";
 
 export const CardWrapper = styled.div`
@@ -10,6 +9,7 @@ margin: 0 auto;
 
 .form-header {
 	.login-logo {
+	min-width: 200px;
 	max-width: 10vw;
 	margin-bottom: 3vh;
 }
@@ -43,6 +43,9 @@ justify-content: center;
 
 .policies {
 	margin-top: 10px;
+	a {
+		text-decoration: none;
+	}
 }
 
 .login-buttons {
