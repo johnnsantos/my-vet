@@ -13,5 +13,13 @@ justify-content: center;
 img {
 	width: 110px;
 	margin-right: 20px;
+	@media screen and (max-width: 950px) {
+	margin: 2vh 0;
+}
+}
+
+@media screen and (max-width: 950px) {
+	flex-flow: column;
+	padding: 3vh 0 5vh;
 }
 `

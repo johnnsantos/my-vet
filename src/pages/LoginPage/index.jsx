@@ -10,10 +10,10 @@ const LoginPage = () => {
 			direction="row"
 			justifyContent="center"
 			alignItems="flex-end">
-			<Grid item xs={6} md={8} lg={8}>
+			<Grid item xs={10} md={8} lg={8}>
 				<LoginForm />
 			</Grid>
-			<Grid item xs={6} md={8} lg={8}>
+			<Grid item xs={10} md={8} lg={8}>
 				<Footer />
 			</Grid>
 		</StyledGrid >

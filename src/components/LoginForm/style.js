@@ -32,6 +32,10 @@ margin-right: 15px;
 	 font-weight: 400;
 	 font-size: 16px;
 	 padding: 0 50px 0;
+	@media screen and (max-width: 950px) {
+	padding: 0;
+	margin: 0 0 15px;
+}
  }
 }
 
@@ -59,6 +63,9 @@ justify-content: space-between;
 width: 100%;
 height: 11vh;
 margin-top: 5vh;
+@media screen and (max-width: 950px) {
+	min-height: 100px;
+}
 }
 }
 
@@ -75,6 +82,9 @@ padding: 50px 55px 50px;
 display: flex;
 flex-flow: row nowrap;
 align-items: flex-start;
+@media screen and (max-width: 950px) {
+	flex-flow: column;
+}
 `
 
 export const CustomInput = styled(OutlinedInput)`
