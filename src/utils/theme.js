@@ -6,7 +6,7 @@ export const theme = {
 	backgroundDefault: '#F5F8FD',
 	backgroundPaper: '#FFFFFF',
 	buttonRadius: '20px',
-	buttonPadding: '8px',
+	buttonPadding: '8px 20px',
 	primaryButton: '#6B48FF',
 	secondaryButton: '#FFFFFF',
 	linkColor: '#007DFF',
@@ -23,7 +23,7 @@ background-color: ${theme.primaryButton} !important;
 color: ${theme.fontColorLight} !important;
 border-radius: ${theme.buttonRadius} !important;
 padding: ${theme.buttonPadding} !important;
-width: 100%;
+width: ${props => props.isHome ? '100%' : props.width};
 `
 
 export const SecondaryButton = styled(PrimaryButton)`

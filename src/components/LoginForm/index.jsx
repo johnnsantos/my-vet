@@ -28,10 +28,10 @@ const LoginForm = () => {
 						Ao cadastrar-se você concorda com nossa <CustomLink href='#' target='_blank'>política de privacidade</CustomLink> e <CustomLink href='#' target='_blank'>termos de serviço</CustomLink>
 					</span>
 					<div className="login-buttons">
-						<PrimaryButton variant="contained">
+						<PrimaryButton isHome variant="contained">
 							RECEBER LINK DE ACESSO
 						</PrimaryButton>
-						<SecondaryButton>
+						<SecondaryButton isHome>
 							CRIAR O PERFIL DO MEU PET
 						</SecondaryButton>
 					</div>
