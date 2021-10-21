@@ -8,8 +8,8 @@ const Dashboard = () => {
 		<>
 			<DashboardHeader />
 			<DashboardMenu />
-			<PageName />
-			<PetManagement empty />
+			<PageName name={'Meus pets'} />
+			<PetManagement />
 		</>
 	)
 }

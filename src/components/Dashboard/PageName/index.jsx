@@ -1,10 +1,10 @@
 import { PageNameContainer } from "./style"
 
-const PageName = () => {
+const PageName = (props) => {
 	return (
 		<PageNameContainer>
 			<span className='pagename'>
-				Meus pets
+				{props.name}
 			</span>
 		</PageNameContainer>
 	)
