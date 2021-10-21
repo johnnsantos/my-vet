@@ -54,3 +54,18 @@ background-color: transparent !important;
 border: 1px solid ${theme.warningColor} !important;
 padding: 5px 40px !important;
 `
+
+export const ButtonControl = styled.div`
+display: flex;
+flex-flow: row nowrap;
+align-items: center;
+justify-content: flex-end;
+`
+
+export const CancelButton = styled(Button)`
+color: rgba(0, 0, 0, 0.5) !important;
+`
+
+export const ConfirmButton = styled(Button)`
+color: ${theme.primaryButton} !important;
+`

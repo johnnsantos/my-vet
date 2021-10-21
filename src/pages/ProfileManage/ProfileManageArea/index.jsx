@@ -1,4 +1,4 @@
-import { Card, CardContent, IconButton } from "@mui/material"
+import { Card, CardContent, IconButton, Modal, Typography } from "@mui/material"
 import { ProfileManageContent } from "./style"
 import TextField from '@mui/material/TextField';
 import { AttachFile } from "@mui/icons-material";
@@ -8,10 +8,24 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
-import { SaveButton, DisableButton, DisableAccount } from './style'
+import { SaveButton, DisableButton, DisableAccount, CancelButton, ConfirmButton, ButtonControl } from './style'
+
+const style = {
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	width: 400,
+	bgcolor: 'background.paper',
+	boxShadow: 24,
+	p: 4,
+};
 
 const ProfileManageArea = () => {
 	const [profile, setProfile] = useState('Tutor')
+	const [modalOpen, setModalOpen] = useState(false)
+
+	const toggleModal = () => setModalOpen(!modalOpen)
 
 	const handleUpload = () => {
 		console.log('upou')
@@ -23,6 +37,34 @@ const ProfileManageArea = () => {
 
 	return (
 		<>
+			<Modal
+				open={modalOpen}
+				onClose={toggleModal}
+				aria-labelledby="modal-modal-title"
+				aria-describedby="modal-modal-description"
+			>
+				<div>
+					<Box sx={style}>
+						<Typography id="modal-modal-title" variant="h6" component="h2">
+							Desativar minha conta
+						</Typography>
+						<Typography id="modal-modal-description" sx={{ my: 4, textAlign: 'center' }}>
+							Tem certeza que deseja desativar sua conta?
+						</Typography>
+						<Typography id="modal-modal-description" sx={{ my: 4, textAlign: 'center', color: 'gray' }}>
+							Explicação sobre dados ao desativar.
+						</Typography>
+						<ButtonControl>
+							<CancelButton>
+								CANCELAR
+							</CancelButton>
+							<ConfirmButton>
+								TENHO CERTEZA
+							</ConfirmButton>
+						</ButtonControl>
+					</Box>
+				</div>
+			</Modal>
 			<Card>
 				<CardContent>
 					<ProfileManageContent>
@@ -106,7 +148,7 @@ const ProfileManageArea = () => {
 				</CardContent>
 			</Card>
 			<DisableAccount>
-				<DisableButton>
+				<DisableButton onClick={toggleModal}>
 					DESATIVAR MINHA CONTA
 				</DisableButton>
 			</DisableAccount>
