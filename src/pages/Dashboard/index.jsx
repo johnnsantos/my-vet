@@ -9,7 +9,7 @@ const Dashboard = () => {
 			<DashboardHeader />
 			<DashboardMenu />
 			<PageName />
-			<PetManagement />
+			<PetManagement empty />
 		</>
 	)
 }

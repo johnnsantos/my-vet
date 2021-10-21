@@ -5,6 +5,7 @@ import { PetControl } from './style'
 import { useState } from 'react'
 import { Modal, Box, Typography } from "@mui/material"
 import PetCard from "../PetCard"
+import EmptyBanner from "../EmptyBanner"
 
 const style = {
 	position: 'absolute',
@@ -17,7 +18,7 @@ const style = {
 	p: 4,
 };
 
-const PetManagement = () => {
+const PetManagement = (props) => {
 	const [open, setOpen] = useState(false)
 	const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
@@ -62,12 +63,19 @@ const PetManagement = () => {
 				alignItems="flex-start"
 				spacing={6}
 			>
-				<Grid item xs={8} sm={8} md={6} lg={3}>
-					<PetCard rex />
-				</Grid>
-				<Grid item xs={8} sm={8} md={6} lg={3}>
-					<PetCard regular />
-				</Grid>
+				{props.empty ? (
+					<EmptyBanner />
+				) : (
+					<>
+						<Grid item xs={8} sm={8} md={6} lg={3}>
+							<PetCard rex />
+						</Grid>
+						<Grid item xs={8} sm={8} md={6} lg={3}>
+							<PetCard regular />
+						</Grid>
+					</>
+				)}
+
 			</Grid>
 		</Grid>
 	)
