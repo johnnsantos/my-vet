@@ -7,10 +7,15 @@ display: flex;
 flex-flow: row nowrap;
 align-items: center;
 justify-content: start;
+
 .wrapper{
 font-size: 16px;
 max-width: 1200px;
 width: 100%;
 margin: 0 auto;
+}
+
+@media screen and (max-width: 736px) {
+	display: none;
 }
 `

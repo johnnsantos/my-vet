@@ -9,6 +9,16 @@ flex-flow: row nowrap;
 align-items: center;
 justify-content: center;
 
+@media screen and (max-width: 736px) {
+	flex-flow: row wrap;
+	padding: 30px 40px;
+
+	svg {
+		margin-left: 15px;
+		margin-top: 15px;
+	}
+}
+
 .title {
 	color: rgba(74, 80, 86, 1);
 	font-size: 20px;
@@ -30,6 +40,10 @@ justify-content: center;
 	align-items: flex-start;
 	justify-content: flex-start;
 	width: 60%;
+
+	@media screen and (max-width: 736px) {
+		width: 100%;
+	}
 }
 
 .details {
@@ -57,6 +71,10 @@ justify-content: center;
 	.time {
 		margin: 0 15px 0;
 	}
+	@media screen and (max-width: 736px) {
+	width: 80%;
+	margin-top: 15px;
+}
 }
 `
 

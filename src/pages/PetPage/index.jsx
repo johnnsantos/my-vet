@@ -20,14 +20,14 @@ const PetPage = () => {
 				<Grid
 					container
 					direction="row"
-					justifyContent="flex-start"
+					justifyContent="center"
 					alignItems="flex-start"
 					spacing={6}
 				>
-					<Grid item lg={3}>
+					<Grid item xs={12} sm={10} md={4} lg={3}>
 						<PetCard petpage />
 					</Grid>
-					<Grid item lg={9}>
+					<Grid item xs={12} sm={10} md={6} lg={9}>
 						<RefreshArea>
 							<PrimaryButton startIcon={<Update />}>
 								ATUALIZAR

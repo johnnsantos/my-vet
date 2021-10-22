@@ -13,4 +13,9 @@ color: rgba(74, 80, 86, 1);
 img {
 	margin-right: 10px;
 }
+
+@media screen and (max-width: 736px) {
+	margin: 25px;
+	justify-content: center;
+}
 `

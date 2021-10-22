@@ -33,4 +33,8 @@ justify-content: center;
 		}
 	}
 }
+
+@media screen and (max-width: 739px) {
+	margin-bottom: 50px;
+}
 `
