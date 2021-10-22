@@ -9,7 +9,7 @@ padding: 10px;
 export const StyledChip = styled.div`
 padding: 4px 10px;
 color: ${theme.fontColorLight};
-background-color: ${props => props.regular ? theme.successColor : theme.warningColor};
+background-color: ${props => props.healthy ? theme.successColor : theme.warningColor};
 border-radius: 64px;
 font-size: 12px;
 margin-bottom: 20px;

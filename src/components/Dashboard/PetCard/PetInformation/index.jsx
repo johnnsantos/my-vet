@@ -1,6 +1,6 @@
 import { InformationContainer } from './style'
 
-const PetInformation = (props) => {
+const PetInformation = ({ sex, weight, breed, age }) => {
 	return (
 		<InformationContainer>
 			<div className="info sex">
@@ -8,8 +8,7 @@ const PetInformation = (props) => {
 					SEXO
 				</span>
 				<span className="info-content">
-					Macho
-					castrado
+					{sex}
 				</span>
 			</div>
 			<div className="info breed">
@@ -17,8 +16,7 @@ const PetInformation = (props) => {
 					RAÇA
 				</span>
 				<span className="info-content">
-					Affegan
-					hound
+					{breed}
 				</span>
 			</div>
 			<div className="info weight">
@@ -26,7 +24,7 @@ const PetInformation = (props) => {
 					PESO(KG)
 				</span>
 				<span className="info-content">
-					13
+					{weight}
 				</span>
 			</div>
 			<div className="info age">
@@ -34,7 +32,7 @@ const PetInformation = (props) => {
 					IDADE
 				</span>
 				<span className="info-content">
-					5
+					{age}
 				</span>
 			</div>
 		</InformationContainer>

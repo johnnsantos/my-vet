@@ -1,10 +1,13 @@
 import { StyledPaper } from "./style"
+import { RouterLink } from '../../../utils/theme'
 
 const DashboardMenu = () => {
 	return (
 		<StyledPaper elevation={4}>
 			<div className="wrapper">
-				<span>Meus pets</span>
+				<RouterLink to='/dashboard'>
+					Meus pets
+				</RouterLink>
 			</div>
 		</StyledPaper>
 	)

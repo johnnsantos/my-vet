@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { Card, OutlinedInput } from "@material-ui/core";
+import { Card } from "@material-ui/core";
+import TextField from '@mui/material/TextField';
 
 export const CardWrapper = styled.div`
 line-height: 25px;
@@ -92,6 +93,6 @@ align-items: flex-start;
 }
 `
 
-export const CustomInput = styled(OutlinedInput)`
+export const CustomInput = styled(TextField)`
 width: 100%;
 `

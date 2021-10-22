@@ -6,6 +6,9 @@ import { useState } from 'react'
 import { Modal, Box, Typography } from "@mui/material"
 import PetCard from "../PetCard"
 import EmptyBanner from "../EmptyBanner"
+import { useEffect } from "react"
+import { Redirect } from "react-router"
+import { useHistory } from "react-router"
 
 const style = {
 	position: 'absolute',
@@ -20,9 +23,21 @@ const style = {
 };
 
 const PetManagement = (props) => {
+	const history = useHistory()
 	const [open, setOpen] = useState(false)
 	const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
+	const [pets, setPets] = useState([])
+
+	const handlePetPage = (id) => {
+		history.push(`/pet/${id}`)
+	}
+
+	useEffect(() => {
+		let { userPets } = JSON.parse(localStorage.getItem('userInfo'))
+		setPets(userPets)
+	}, [])
+
 	return (
 		<StyledGrid
 			container
@@ -52,16 +67,15 @@ const PetManagement = (props) => {
 					ADICIONAR NOVO PET
 				</PrimaryButton>
 			</PetControl>
-			{props.empty ? (
+			{pets.length === 0 ? (
 				<EmptyBanner />
 			) : (
 				<>
-					<Grid item xs={11} sm={10} md={6} lg={3}>
-						<PetCard rex />
-					</Grid>
-					<Grid item xs={11} sm={10} md={6} lg={3}>
-						<PetCard regular />
-					</Grid>
+					{pets.map((pet) => (
+						<Grid key={pet.id} item xs={11} sm={10} md={6} lg={3} onClick={() => handlePetPage(pet.id)}>
+							<PetCard {...pet} />
+						</Grid>
+					))}
 				</>
 			)}
 		</StyledGrid>

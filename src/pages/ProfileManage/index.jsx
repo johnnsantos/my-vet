@@ -4,8 +4,16 @@ import DashboardMenu from "../../components/Dashboard/DashboardMenu"
 import PageName from "../../components/Dashboard/PageName"
 import CardProfile from "./CardProfile"
 import ProfileManageArea from "./ProfileManageArea"
+import { useEffect, useState } from "react"
 
 const ProfileManage = () => {
+	const [userInfo, setUserInfo] = useState({})
+
+	useEffect(() => {
+		let { userInfo } = JSON.parse(localStorage.getItem('userInfo'))
+		setUserInfo(userInfo)
+	}, [])
+
 	return (
 		<>
 			<DashboardHeader />
@@ -21,10 +29,10 @@ const ProfileManage = () => {
 				lg={8}
 			>
 				<Grid item xs={12} sm={12} md={6} lg={4} style={{ maxWidth: '360px' }}>
-					<CardProfile />
+					<CardProfile {...userInfo} />
 				</Grid>
 				<Grid item xs={12} sm={12} md={6} lg={6}>
-					<ProfileManageArea />
+					<ProfileManageArea {...userInfo} />
 				</Grid>
 			</Grid>
 		</>

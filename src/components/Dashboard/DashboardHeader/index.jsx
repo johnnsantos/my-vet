@@ -1,20 +1,27 @@
 import { Header, MobileMenu, DrawerHeader } from "./style"
 import logoHeader from '../../../assets/images/Header/logoHeader.png'
 import logoMobile from '../../../assets/images/Header/logoMobile.png'
-import avatar from '../../../assets/images/Header/avatar.png'
 import { Avatar, Menu, MenuItem, ListItemIcon } from "@material-ui/core"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Settings, Logout } from "@mui/icons-material"
 import Drawer from '@mui/material/Drawer';
 import { IconButton } from "@material-ui/core"
 import MenuIcon from '@mui/icons-material/Menu'
 import { ChevronLeft } from "@mui/icons-material"
+import { RouterLink } from "../../../utils/theme"
+import { useHistory } from "react-router"
+import { useDispatch } from "react-redux"
+import { handleUserThunk } from "../../../redux/modules/user/thunks"
 
 const drawerWidth = 200;
 
 const DashboardHeader = () => {
+	const [name, setName] = useState('')
+	const [photoUrl, setPhotoUrl] = useState('')
 	const [anchorEl, setAnchorEl] = useState(null)
 	const [openDrawer, setOpenDrawer] = useState(false)
+	const history = useHistory()
+	const dispatch = useDispatch()
 
 	const open = Boolean(anchorEl)
 
@@ -33,6 +40,18 @@ const DashboardHeader = () => {
 	const handleDrawerClose = () => {
 		setOpenDrawer(false)
 	}
+
+	const handleLogout = () => {
+		window.localStorage.clear();
+		dispatch(handleUserThunk([]));
+		history.push('/login')
+	}
+
+	useEffect(() => {
+		let { userInfo } = JSON.parse(localStorage.getItem('userInfo'))
+		setName(userInfo.name)
+		setPhotoUrl(userInfo.photoUrl)
+	}, [])
 
 	return (
 		<>
@@ -68,19 +87,19 @@ const DashboardHeader = () => {
 			</MobileMenu>
 			<Header>
 				<div className='container'>
-					<a href="#" className='logo-desktop'>
+					<RouterLink to='/dashboard' className='logo-desktop'>
 						<img alt='Guia Vet' src={logoHeader} />
-					</a>
-					<a href="#" className='logo-mobile'>
+					</RouterLink>
+					<RouterLink to='/dashboard' className='logo-mobile'>
 						<img alt='Guia Vet' src={logoMobile} />
-					</a>
+					</RouterLink>
 					<div onClick={handleClick} className="user-profile">
 						<Avatar
-							alt="Ciro Bottini"
-							src={avatar}
+							alt={name}
+							src={photoUrl}
 						/>
 						<span className="username">
-							Ciro Bottini
+							{name}
 						</span>
 					</div>
 				</div>
@@ -96,12 +115,14 @@ const DashboardHeader = () => {
 					}}
 				>
 					<MenuItem>
-						<ListItemIcon>
-							<Settings fontSize="small" />
-						</ListItemIcon>
-						Meu perfil
+						<RouterLink to='/perfil'>
+							<ListItemIcon>
+								<Settings fontSize="small" />
+							</ListItemIcon>
+							Meu perfil
+						</RouterLink>
 					</MenuItem>
-					<MenuItem>
+					<MenuItem onClick={handleLogout}>
 						<ListItemIcon>
 							<Logout fontSize="small" />
 						</ListItemIcon>

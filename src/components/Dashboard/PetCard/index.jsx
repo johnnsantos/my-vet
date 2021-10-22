@@ -1,4 +1,4 @@
-import { Card, CardActions, CardContent, CardHeader, IconButton, Avatar } from "@mui/material"
+import { Card, CardActions, CardContent, IconButton } from "@mui/material"
 import { Create } from "@mui/icons-material"
 import { EditArea, StyledChip } from './style'
 import PetHeader from "./PetHeader"
@@ -6,7 +6,7 @@ import PetInformation from "./PetInformation"
 
 const PetCard = (props) => {
 	return (
-		<Card elevation={2} sx={{ mb: 2 }}>
+		<Card elevation={2} sx={{ mb: 2, cursor: 'pointer' }}>
 			{props.petpage ? null : (
 				<EditArea>
 					<IconButton aria-label="edit">
@@ -21,7 +21,7 @@ const PetCard = (props) => {
 			{props.petpage ? null : (
 				<CardActions sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 					<StyledChip {...props}>
-						{props.rex ? 'Controle atrasado' : 'Saúde em dia'}
+						{props.healthy ? 'Saúde em dia' : 'Controle atrasado'}
 					</StyledChip>
 				</CardActions>
 			)}

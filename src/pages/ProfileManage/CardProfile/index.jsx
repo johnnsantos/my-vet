@@ -1,15 +1,14 @@
 import { Card, CardContent, Avatar } from "@mui/material"
-import ciro from '../../../assets/images/UserProfile/ciro.png'
 import { UserDetails } from './style'
 
-const CardProfile = () => {
+const CardProfile = ({ name, photoUrl }) => {
 	return (
 		<Card>
 			<CardContent>
 				<UserDetails>
-					<Avatar src={ciro} alt='Ciro Bottini' sx={{ width: '40%', height: '40%' }} />
+					<Avatar src={photoUrl} alt={name} sx={{ width: '40%', height: '40%', minWidth: '100px', minHeight: '100px' }} />
 					<span className="username">
-						Ciro Bottini
+						{name}
 					</span>
 				</UserDetails>
 			</CardContent>

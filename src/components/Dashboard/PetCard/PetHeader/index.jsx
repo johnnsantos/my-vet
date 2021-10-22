@@ -1,17 +1,15 @@
 import { Avatar } from "@mui/material"
 import { PetName, Specie } from "./style"
-import rex from '../../../../assets/images/PetCard/rex.png'
-import luna from '../../../../assets/images/PetCard/luna.png'
 
-const PetHeader = (props) => {
+const PetHeader = ({ photo, name, breed }) => {
 	return (
 		<>
-			<Avatar sx={{ width: '60%', height: '60%', minWidth: '100px', minHeight: '100px' }} src={props.rex ? rex : luna} />
+			<Avatar sx={{ width: '60%', height: '60%', minWidth: '100px', minHeight: '100px' }} src={photo} />
 			<PetName>
-				{props.rex ? 'Rex' : 'Luna'}
+				{name}
 			</PetName>
 			<Specie>
-				Ciro Bottini
+				{breed}
 			</Specie>
 		</>
 	)

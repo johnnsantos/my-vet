@@ -21,14 +21,14 @@ const style = {
 	p: 4,
 };
 
-const ProfileManageArea = () => {
+const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 	const [profile, setProfile] = useState('Tutor')
 	const [modalOpen, setModalOpen] = useState(false)
 
 	const toggleModal = () => setModalOpen(!modalOpen)
 
 	const handleUpload = () => {
-		console.log('upou')
+		console.log('upload')
 	}
 
 	const handleSelect = (e) => {

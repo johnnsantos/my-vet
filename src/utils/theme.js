@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom"
 
 export const theme = {
 	header: '#613CB0',
@@ -35,4 +36,13 @@ border: 1px solid ${theme.primaryButton} !important;
 export const CustomLink = styled.a`
 text-decoration: none;
 color: ${props => props.primary ? theme.primaryButton : theme.linkColor};
+`
+
+export const RouterLink = styled(Link)`
+text-decoration: none;
+color: rgba(0, 0, 0, 0.87);
+
+&:hover {
+	color: rgba(0, 0, 0, 1);
+}
 `
