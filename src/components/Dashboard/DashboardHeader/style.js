@@ -34,7 +34,37 @@ justify-content: center;
 	}
 }
 
+.logo-mobile {
+	display: none;
+}
+
 @media screen and (max-width: 739px) {
 	margin-bottom: 50px;
+
+	.logo-desktop {
+		display: none;
+	}
+
+	.logo-mobile {
+	display: block;
+	margin-left: 45px;
+	}
 }
+`
+
+export const MobileMenu = styled.div`
+color: ${theme.fontColorLight};
+display: none;
+@media screen and (max-width: 736px) {
+display: inline-flex;
+position: absolute;
+height: 65px;
+}
+`
+
+export const DrawerHeader = styled.div`
+display: flex;
+align-items: center;
+padding: 5px;
+justify-content: flex-end;
 `
