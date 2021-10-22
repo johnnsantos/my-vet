@@ -10,7 +10,7 @@ import { IconButton } from "@material-ui/core"
 import MenuIcon from '@mui/icons-material/Menu'
 import { ChevronLeft } from "@mui/icons-material"
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const DashboardHeader = () => {
 	const [anchorEl, setAnchorEl] = useState(null)
@@ -45,7 +45,7 @@ const DashboardHeader = () => {
 						boxSizing: 'border-box',
 					},
 				}}
-				variant="persistent"
+				variant="temporary"
 				anchor="left"
 				open={openDrawer}
 			>

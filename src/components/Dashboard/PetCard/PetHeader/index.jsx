@@ -6,7 +6,7 @@ import luna from '../../../../assets/images/PetCard/luna.png'
 const PetHeader = (props) => {
 	return (
 		<>
-			<Avatar sx={{ width: '50%', height: '50%' }} src={props.rex ? rex : luna} />
+			<Avatar sx={{ width: '60%', height: '60%', minWidth: '100px', minHeight: '100px' }} src={props.rex ? rex : luna} />
 			<PetName>
 				{props.rex ? 'Rex' : 'Luna'}
 			</PetName>
