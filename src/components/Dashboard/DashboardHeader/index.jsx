@@ -1,7 +1,7 @@
 import { Header, MobileMenu, DrawerHeader } from "./style"
 import logoHeader from '../../../assets/images/Header/logoHeader.png'
 import logoMobile from '../../../assets/images/Header/logoMobile.png'
-import { Avatar, Menu, MenuItem, ListItemIcon } from "@material-ui/core"
+import { Avatar, Menu, MenuItem, ListItemIcon, Container, Grid } from "@material-ui/core"
 import { useEffect, useState } from "react"
 import { Settings, Logout } from "@mui/icons-material"
 import Drawer from '@mui/material/Drawer';
@@ -86,23 +86,31 @@ const DashboardHeader = () => {
 				</IconButton>
 			</MobileMenu>
 			<Header>
-				<div className='container'>
-					<RouterLink to='/dashboard' className='logo-desktop'>
-						<img alt='Guia Vet' src={logoHeader} />
-					</RouterLink>
-					<RouterLink to='/dashboard' className='logo-mobile'>
-						<img alt='Guia Vet' src={logoMobile} />
-					</RouterLink>
-					<div onClick={handleClick} className="user-profile">
-						<Avatar
-							alt={name}
-							src={photoUrl}
-						/>
-						<span className="username">
-							{name}
-						</span>
-					</div>
-				</div>
+				<Container>
+					<Grid
+						container
+						direction="row"
+						justifyContent="space-between"
+						alignItems="flex-start"
+						className="container"
+					>
+						<RouterLink to='/dashboard' className='logo-desktop'>
+							<img alt='Guia Vet' src={logoHeader} />
+						</RouterLink>
+						<RouterLink to='/dashboard' className='logo-mobile'>
+							<img alt='Guia Vet' src={logoMobile} />
+						</RouterLink>
+						<div onClick={handleClick} className="user-profile">
+							<Avatar
+								alt={name}
+								src={photoUrl}
+							/>
+							<span className="username">
+								{name}
+							</span>
+						</div>
+					</Grid>
+				</Container>
 				<Menu
 					style={{ 'top': '40px' }}
 					variant='menu'

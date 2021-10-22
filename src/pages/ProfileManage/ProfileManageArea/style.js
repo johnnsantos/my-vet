@@ -64,8 +64,10 @@ justify-content: flex-end;
 
 export const CancelButton = styled(Button)`
 color: rgba(0, 0, 0, 0.5) !important;
+padding: 10px 20px !important;
 `
 
 export const ConfirmButton = styled(Button)`
 color: ${theme.primaryButton} !important;
+padding: 10px 20px !important;
 `

@@ -24,9 +24,9 @@ color: #7E8192;
 }
 
 .info-content {
-font-weight: 500;
-width: 50%;
-margin: 0 auto 15px;
+  font-weight: 500;
+  margin: 0 auto 15px;
+  padding: 0 20px;
 }
 
 .sex {

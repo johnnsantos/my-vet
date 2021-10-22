@@ -4,10 +4,10 @@ import TextField from '@mui/material/TextField';
 import { AttachFile } from "@mui/icons-material";
 import { useState } from 'react'
 import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
+import { MenuItem } from '@material-ui/core'
 import { SaveButton, DisableButton, DisableAccount, CancelButton, ConfirmButton, ButtonControl } from './style'
 
 const style = {
@@ -55,11 +55,11 @@ const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 							Explicação sobre dados ao desativar.
 						</Typography>
 						<ButtonControl>
-							<CancelButton>
-								CANCELAR
+							<CancelButton uppercase onClick={toggleModal}>
+								Cancelar
 							</CancelButton>
-							<ConfirmButton>
-								TENHO CERTEZA
+							<ConfirmButton uppercase>
+								Tenho certeza
 							</ConfirmButton>
 						</ButtonControl>
 					</Box>

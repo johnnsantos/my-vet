@@ -1,4 +1,4 @@
-import { Grid } from "@material-ui/core"
+import { Container, Grid } from "@material-ui/core"
 import DashboardHeader from "../../components/Dashboard/DashboardHeader"
 import DashboardMenu from "../../components/Dashboard/DashboardMenu"
 import PageName from "../../components/Dashboard/PageName"
@@ -30,7 +30,7 @@ const PetPage = () => {
 			<DashboardHeader />
 			<DashboardMenu />
 			<PageName name={'Meus pets'} sufix={actualPet.name} />
-			<PetsWrapper>
+			<Container style={{ marginTop: '20px' }}>
 				<Grid
 					container
 					direction="row"
@@ -38,10 +38,10 @@ const PetPage = () => {
 					alignItems="flex-start"
 					spacing={6}
 				>
-					<Grid item xs={12} sm={10} md={4} lg={3}>
+					<Grid item xs={12} sm={12} md={4} lg={3}>
 						<PetCard petpage {...actualPet} />
 					</Grid>
-					<Grid item xs={12} sm={10} md={6} lg={9}>
+					<Grid item xs={12} sm={12} md={8} lg={9}>
 						<RefreshArea>
 							<PrimaryButton startIcon={<Update />}>
 								ATUALIZAR
@@ -59,7 +59,7 @@ const PetPage = () => {
 						</Box>
 					</Grid>
 				</Grid>
-			</PetsWrapper>
+			</Container>
 		</>
 	)
 }

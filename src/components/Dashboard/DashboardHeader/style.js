@@ -11,14 +11,6 @@ align-items: center;
 justify-content: center;
 
 .container {
-	max-width: 1200px;
-	width: 90%;
-	margin: 0 auto;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	flex-flow: row nowrap;
-
 	.user-profile {
 		cursor: pointer;
 		display: flex;

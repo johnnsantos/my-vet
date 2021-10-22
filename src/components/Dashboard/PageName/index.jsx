@@ -1,10 +1,10 @@
-import { PageNameContainer } from "./style"
+import { Container } from "@material-ui/core";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 const PageName = (props) => {
 	return (
-		<PageNameContainer>
-			<span className='pagename'>
+		<Container>
+			<div className='pagename' style={{ marginTop: '20px' }}>
 				{props.sufix ? (
 					<span style={{ display: 'flex', alignItems: 'center', justifyItems: 'center' }}>
 						{props.name} <ChevronRightIcon sx={{ mx: 1 }} /> {props.sufix}
@@ -14,8 +14,8 @@ const PageName = (props) => {
 						{props.name}
 					</span>
 				)}
-			</span>
-		</PageNameContainer>
+			</div>
+		</Container>
 	)
 }
 

@@ -1,14 +1,15 @@
 import { StyledPaper } from "./style"
 import { RouterLink } from '../../../utils/theme'
+import { Container } from "@material-ui/core"
 
 const DashboardMenu = () => {
 	return (
 		<StyledPaper elevation={4}>
-			<div className="wrapper">
+			<Container>
 				<RouterLink to='/dashboard'>
 					Meus pets
 				</RouterLink>
-			</div>
+			</Container>
 		</StyledPaper>
 	)
 }
