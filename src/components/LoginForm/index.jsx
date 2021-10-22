@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 import { schemaLogin } from '../../utils/schemas'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { Redirect, useHistory } from 'react-router'
+import { Redirect } from 'react-router'
 import { requestTokenByEmail } from '../../services/api'
 import { useState } from 'react'
 import { CircularProgress } from '@mui/material'
@@ -18,9 +18,8 @@ const LoginForm = () => {
 	const [authenticated, setAuthenticated] = useState(false)
 
 	const dispatch = useDispatch()
-	const history = useHistory()
 
-	const { register, unregister, handleSubmit, setValue, errors, getValues } = useForm({
+	const { register, unregister, handleSubmit, setValue, errors } = useForm({
 		resolver: yupResolver(schemaLogin),
 		mode: 'onSubmit'
 	})

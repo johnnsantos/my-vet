@@ -7,7 +7,6 @@ import { Modal, Box, Typography } from "@mui/material"
 import PetCard from "../PetCard"
 import EmptyBanner from "../EmptyBanner"
 import { useEffect } from "react"
-import { Redirect } from "react-router"
 import { useHistory } from "react-router"
 
 const style = {
