@@ -117,9 +117,9 @@ const LoginForm = () => {
 								Receber link de acesso
 							</PrimaryButton>
 						)}
-						<SecondaryButton uppercase isHome>
+						{/* <SecondaryButton uppercase isHome>
 							Criar o perfil do meu pet
-						</SecondaryButton>
+						</SecondaryButton> */}
 					</div>
 				</form>
 			</>

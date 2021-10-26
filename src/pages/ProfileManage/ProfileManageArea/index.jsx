@@ -213,12 +213,12 @@ const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 							Explicação sobre dados ao desativar.
 						</Typography>
 						<ButtonControl>
-							<CancelButton uppercase onClick={toggleModal}>
+							<SaveButton style={{ marginRight: '15px' }} uppercase onClick={toggleModal}>
 								Cancelar
-							</CancelButton>
-							<ConfirmButton uppercase onClick={disableAccount}>
+							</SaveButton>
+							<DisableButton uppercase onClick={disableAccount}>
 								Tenho certeza
-							</ConfirmButton>
+							</DisableButton>
 						</ButtonControl>
 					</Box>
 				</div>

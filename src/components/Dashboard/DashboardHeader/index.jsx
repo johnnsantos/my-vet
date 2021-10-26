@@ -55,7 +55,7 @@ const DashboardHeader = () => {
 
 	return (
 		<>
-			<Drawer
+			{/* <Drawer
 				sx={{
 					width: drawerWidth,
 					flexShrink: 0,
@@ -74,8 +74,8 @@ const DashboardHeader = () => {
 					</IconButton>
 				</DrawerHeader>
 
-			</Drawer>
-			<MobileMenu>
+			</Drawer> */}
+			{/* <MobileMenu>
 				<IconButton
 					color="inherit"
 					aria-label="open drawer"
@@ -84,7 +84,7 @@ const DashboardHeader = () => {
 				>
 					<MenuIcon />
 				</IconButton>
-			</MobileMenu>
+			</MobileMenu> */}
 			<Header>
 				<Container>
 					<Grid

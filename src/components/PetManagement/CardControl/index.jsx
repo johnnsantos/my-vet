@@ -49,7 +49,7 @@ const CardControl = (props) => {
 					</div>
 				)}
 			</ContentCard>
-			{!props.highlight && !props.isLastCard && (<Divider variant="middle" />)}
+			<Divider variant="middle" />
 		</>
 	)
 }

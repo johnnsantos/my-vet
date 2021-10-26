@@ -1,5 +1,5 @@
-import rex from './assets/images/PetCard/rex.png'
-import luna from './assets/images/PetCard/luna.png'
+// import rex from './assets/images/PetCard/rex.png'
+// import luna from './assets/images/PetCard/luna.png'
 import avatar from './assets/images/UserProfile/ciro.png'
 
 export const mockData = {
@@ -16,9 +16,9 @@ export const mockData = {
 	},
 	userPets: [{
 		id: 1,
-		photo: rex,
+		photo: null,
 		name: 'Rex',
-		specie: 'Ciro Bottini',
+		specie: 'dog',
 		sex: 'Macho castrado',
 		breed: 'Affegan hound',
 		weight: 13,
@@ -113,9 +113,9 @@ export const mockData = {
 	},
 	{
 		id: 2,
-		photo: luna,
+		photo: null,
 		name: 'Luna',
-		specie: 'Ciro Bottini',
+		specie: 'cat',
 		sex: 'Fêmea castrado',
 		breed: 'SRD Sem raça definida',
 		weight: '07',

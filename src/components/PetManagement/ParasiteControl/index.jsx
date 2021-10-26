@@ -10,7 +10,7 @@ const ParasiteControl = ({ controls }) => {
 				<img src={parasitecontrol} alt='Controle de parasitas' />
 				Controle de parasitas
 			</ParasiteTitle>
-			{controls && controls.parasites.map((parasite, index, arr) => <CardControl key={index} {...parasite} isLastCard={arr.length - 1 === index} />)}
+			{controls && controls.parasites.map((parasite, index, arr) => <CardControl key={index} {...parasite} isLastCard={arr.length - 2 === index} />)}
 		</Card>
 	)
 }

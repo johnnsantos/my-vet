@@ -20,6 +20,9 @@ export const CardWrapper = styled.div`
 				margin: 3vh auto;
 				display: flex;
 			}
+			@media screen and (max-width: 768px) {
+				max-width: 120px;
+			}
 		}
 	}
 
@@ -32,6 +35,9 @@ export const CardWrapper = styled.div`
 		.dog-image {
 			margin-bottom: 15px;
 			width: 100%;
+			@media screen and (max-width: 768px) {
+				width: 80%;
+			}
 		}
 		span {
 			font-weight: 400;
@@ -57,6 +63,7 @@ export const CardWrapper = styled.div`
 
 	.policies {
 		margin-top: 10px;
+		display: block;
 	}
 
 	.login-buttons {
