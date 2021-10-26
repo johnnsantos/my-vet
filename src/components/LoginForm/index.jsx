@@ -2,10 +2,6 @@ import logoFull from '../../assets/images/logoFull.svg'
 import dog from '../../assets/images/LoginForm/dog.png'
 import { CardWrapper, StyledCard, CustomInput } from './style'
 import { PrimaryButton, SecondaryButton, CustomLink } from '../../utils/theme'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm } from 'react-hook-form'
-import { schemaLogin } from '../../utils/schemas'
-import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Redirect } from 'react-router'
 import { requestTokenByEmail } from '../../services/api'
@@ -13,46 +9,126 @@ import { useState } from 'react'
 import { CircularProgress } from '@mui/material'
 import { handleUserThunk } from '../../redux/modules/user/thunks'
 import { Grid } from '@material-ui/core'
+import { Formik } from 'formik'
+import * as Yup from 'yup'
 
 const LoginForm = () => {
-	const [isLoading, setIsLoading] = useState(false)
 	const [authenticated, setAuthenticated] = useState(false)
+	const [formValues, setFormValues] = useState({
+		formState: {
+			email: ''
+		},
+		isSubmitting: false,
+		success: false,
+		hasError: false,
+		errorMessage: '',
+		successMessage: ''
+	})
 
 	const dispatch = useDispatch()
 
-	const { register, unregister, handleSubmit, setValue, errors } = useForm({
-		resolver: yupResolver(schemaLogin),
-		mode: 'onSubmit'
-	})
+	const { isSubmitting, success, hasError, errorMessage, successMessage } =
+		formValues
 
-	useEffect(() => {
-		register("email", { required: "Campo obrigatório" })
-		return () => {
-			unregister("email")
-		}
-	}, [register, unregister])
-
-	const handleForm = async (email) => {
-		setIsLoading(true)
-		requestTokenByEmail(email).then((res) => {
-			console.log(res)
-			setIsLoading(false)
-			const userInfo = res.data
-			dispatch(handleUserThunk(userInfo))
-			setAuthenticated(true)
-		}).catch((err) => {
-			console.log(err)
+	const successHandler = () => {
+		setFormValues({
+			formState: formValues.formState,
+			isSubmitting: false,
+			success: true,
+			hasError: false,
+			isAuthenticated: true,
+			successMessage:
+				'Usuário logado com sucesso!'
 		})
 	}
 
-	const handleChangeEmail = (e) => {
-		e.preventDefault()
-		setValue("email", e.target.value)
+	const errorHandler = error => {
+		setFormValues({
+			...formValues,
+			isSubmitting: false,
+			success: false,
+			hasError: true,
+			errorMessage: 'Houve um erro com o login'
+		})
+		setTimeout(() => {
+			setFormValues({
+				formState: {
+					email: formValues.formState.email || '',
+				},
+				isSubmitting: false,
+				success: false,
+				hasError: false,
+				errorMessage: '',
+				successMessage: ''
+			})
+		}, 5000)
+	}
+
+	const submitForm = formData => {
+		const newState = formValues
+		newState.formState = formData
+
+		setFormValues({ ...newState, isSubmitting: true })
+
+		requestTokenByEmail({ email: formData.email })
+			.then((res) => {
+				successHandler()
+				dispatch(handleUserThunk(res.data))
+			})
+			.catch((err) => {
+				errorHandler(err)
+			})
+	}
+
+	const renderForm = ({
+		values,
+		errors,
+		touched,
+		handleChange,
+		handleBlur,
+		handleSubmit
+	}) => {
+		return (
+			<>
+				<form onSubmit={handleSubmit} noValidate>
+					<h3 className='title'>
+						Acesse o perfil de saúde do seu pet
+					</h3>
+					<CustomInput
+						sx={{ '& .MuiFormHelperText-root': { marginLeft: 0 } }}
+						error={errors.email}
+						onBlur={handleBlur}
+						touched={touched.email}
+						value={values.email}
+						onChange={handleChange}
+						id='email'
+						name='email'
+						placeholder="Email"
+						helperText={errors.email ? errors.email : ''}
+					/>
+					<span className='policies'>
+						Ao cadastrar-se você concorda com nossa <CustomLink href='#' target='_blank'>política de privacidade</CustomLink> e <CustomLink href='#' target='_blank'>termos de serviço</CustomLink>
+					</span>
+					<div className="login-buttons">
+						{isSubmitting ? (
+							<CircularProgress />
+						) : (
+							<PrimaryButton uppercase type='submit' isHome variant="contained">
+								Receber link de acesso
+							</PrimaryButton>
+						)}
+						<SecondaryButton uppercase isHome>
+							Criar o perfil do meu pet
+						</SecondaryButton>
+					</div>
+				</form>
+			</>
+		)
 	}
 
 	return (
 		<>
-			{authenticated ? (
+			{success && !hasError ? (
 				<Redirect to='/dashboard' />
 			) : (
 				<CardWrapper>
@@ -72,39 +148,17 @@ const LoginForm = () => {
 							</Grid>
 							<Grid item lg="6">
 								<div className="form-login">
-									<form onSubmit={handleSubmit(handleForm)} noValidate>
-										<h3 className='title'>
-											Acesse o perfil de saúde do seu pet
-										</h3>
-										<CustomInput
-											id='email'
-											name='email'
-											placeholder="Email"
-											onChange={handleChangeEmail}
-											{...register('email', { required: true })}
-										/>
-										{errors && (
-											<span>
-												{errors.email.message}
-											</span>
-										)}
-										<span className='policies'>
-											Ao cadastrar-se você concorda com nossa <CustomLink href='#' target='_blank'>política de privacidade</CustomLink> e <CustomLink href='#' target='_blank'>termos de serviço</CustomLink>
-										</span>
-										<div className="login-buttons">
-											{isLoading ? (
-												<CircularProgress />
-											) : (
-												<PrimaryButton uppercase type='submit' isHome variant="contained">
-													Receber link de acesso
-												</PrimaryButton>
-											)}
-
-											<SecondaryButton uppercase isHome>
-												Criar o perfil do meu pet
-											</SecondaryButton>
-										</div>
-									</form>
+									<Formik
+										initialValues={formValues.formState}
+										// enableReinitialize
+										onSubmit={submitForm}
+										render={renderForm}
+										validationSchema={Yup.object().shape({
+											email: Yup.string()
+												.email('Por favor, insira um e-mail válido')
+												.required('Por favor, insira um e-mail')
+										})}
+									/>
 								</div>
 							</Grid>
 						</Grid>

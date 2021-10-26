@@ -2,11 +2,22 @@ import { Divider } from "@material-ui/core"
 import { ChevronRight } from "@mui/icons-material"
 import { SecondaryButton } from "../../../utils/theme"
 import { ContentCard, ProgressLine, Status } from './style'
+import { useState } from 'react'
 
 const CardControl = (props) => {
+	const [highlight, setHighlight] = useState(false)
+
 	return (
 		<>
-			<ContentCard highlight={props.highlight} regularity={props.regularity}>
+			<ContentCard
+				onClick={() => console.log(props.id)}
+				onMouseOver={(e) => {
+					e.preventDefault()
+					setHighlight(!highlight)
+				}} onMouseOut={(e) => {
+					e.preventDefault()
+					setHighlight(!highlight)
+				}} highlight={highlight} regularity={props.regularity}>
 				<div className="column">
 					<span className="title">
 						{props.name}

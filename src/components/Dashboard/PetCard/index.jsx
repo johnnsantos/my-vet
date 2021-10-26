@@ -6,7 +6,7 @@ import PetInformation from "./PetInformation"
 
 const PetCard = (props) => {
 	return (
-		<Card elevation={2} sx={{ mb: 2, cursor: 'pointer' }}>
+		<Card elevation={2} sx={{ mb: 2, cursor: props.petpage ? 'default' : 'pointer' }}>
 			{props.petpage ? null : (
 				<EditArea>
 					<IconButton aria-label="edit">

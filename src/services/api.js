@@ -2,25 +2,25 @@ import axios from "axios"
 
 const baseURL = "api"
 
+export const isAuthenticated = () => {
+  return window.localStorage.getItem("authorizationToken") !== null
+}
+
 export const token = () => {
   return window.localStorage.getItem("authorizationToken")
 }
 
 export const requestTokenByEmail = async (email) => {
-  try {
-    let res = await axios.post(`${baseURL}/login`, email)
-    window.localStorage.setItem("authorizationToken", res.data.userInfo.token)
-    window.localStorage.setItem("email", res.data.userInfo.email)
-    return (
-      res.status === 201 && {
-        data: res.data,
-        message: "Login efetuado com sucesso",
-      }
-    );
-  } catch (error) {
-    return { message: "Houve um erro com o login" }
-  }
-};
+  let res = await axios.post(`${baseURL}/login`, email)
+  window.localStorage.setItem("authorizationToken", res.data.userInfo.token)
+  window.localStorage.setItem("email", res.data.userInfo.email)
+  return (
+    res.status === 201 && {
+      data: res.data,
+      message: "Login efetuado com sucesso",
+    }
+  );
+}
 
 export const requestEditProfile = async (data) => {
   const config = {

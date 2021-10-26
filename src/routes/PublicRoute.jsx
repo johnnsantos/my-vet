@@ -1,9 +1,14 @@
-import { Route } from "react-router"
+import { Route } from 'react-router-dom'
+import { Redirect } from "react-router";
+import { isAuthenticated } from '../services/api';
 
-const PublicRoute = (props) => {
-	const { component: RenderComponent, ...rest } = props;
+const PublicRoute = ({ component: Component, ...rest }) => {
 	return (
-		<Route {...rest} render={props => <RenderComponent {...props} />} />
+		<Route {...rest} render={(props) => {
+			return !isAuthenticated()
+				? <Component {...props} />
+				: <Redirect to={{ pathname: '/dashboard', state: { from: props.location } }} />
+		}} />
 	)
 }
 

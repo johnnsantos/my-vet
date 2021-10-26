@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const ContentCard = styled.div`
+cursor: pointer;
 padding: 30px 50px;
 background-color: ${props => props.highlight ? 'rgba(236, 244, 251, 1)' : 'transparent'};
 box-shadow: ${props => props.highlight ? '1px 1px 8px rgba(74, 80, 86, 0.4)' : 'transparent'};

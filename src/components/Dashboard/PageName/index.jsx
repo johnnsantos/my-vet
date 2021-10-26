@@ -1,5 +1,6 @@
 import { Container } from "@material-ui/core";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { RouterLink } from "../../../utils/theme";
 
 const PageName = (props) => {
 	return (
@@ -7,7 +8,7 @@ const PageName = (props) => {
 			<div className='pagename' style={{ marginTop: '20px' }}>
 				{props.sufix ? (
 					<span style={{ display: 'flex', alignItems: 'center', justifyItems: 'center' }}>
-						{props.name} <ChevronRightIcon sx={{ mx: 1 }} /> {props.sufix}
+						<RouterLink to='/dashboard'>{props.name}</RouterLink> <ChevronRightIcon sx={{ mx: 1 }} /> {props.sufix}
 					</span>
 				) : (
 					<span>
