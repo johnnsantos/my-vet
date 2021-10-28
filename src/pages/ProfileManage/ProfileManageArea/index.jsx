@@ -91,6 +91,7 @@ const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 								error={errors.email}
 								onBlur={handleBlur}
 								touched={touched.email}
+								onClick={handleUpload}
 								onChange={handleChange}
 								helperText="Imagens de até 400x400 até 2MB"
 								sx={{ width: '100%', '& .MuiFormHelperText-root': { marginLeft: 0 } }}
@@ -213,12 +214,12 @@ const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 							Explicação sobre dados ao desativar.
 						</Typography>
 						<ButtonControl>
-							<SaveButton style={{ marginRight: '15px' }} uppercase onClick={toggleModal}>
-								Cancelar
-							</SaveButton>
-							<DisableButton uppercase onClick={disableAccount}>
+							<DisableButton style={{ marginRight: '15px' }} uppercase onClick={disableAccount}>
 								Tenho certeza
 							</DisableButton>
+							<SaveButton uppercase onClick={toggleModal}>
+								Cancelar
+							</SaveButton>
 						</ButtonControl>
 					</Box>
 				</div>

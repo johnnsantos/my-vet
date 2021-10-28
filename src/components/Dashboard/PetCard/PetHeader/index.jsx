@@ -3,7 +3,7 @@ import { PetName, Specie } from "./style"
 import placeholderDog from "../../../../assets/images/placeholder-dog.svg"
 import placeholderCat from "../../../../assets/images/placeholder-cat.svg"
 
-const PetHeader = ({ photo, name, breed, specie }) => {
+const PetHeader = ({ photo, name, owner, specie }) => {
 	return (
 		<>
 			<Avatar
@@ -14,7 +14,7 @@ const PetHeader = ({ photo, name, breed, specie }) => {
 				{name}
 			</PetName>
 			<Specie>
-				{breed}
+				{owner}
 			</Specie>
 		</>
 	)

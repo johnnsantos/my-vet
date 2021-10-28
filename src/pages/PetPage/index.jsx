@@ -43,9 +43,7 @@ const PetPage = () => {
 					</Grid>
 					<Grid item xs={12} sm={12} md={8} lg={9}>
 						<RefreshArea>
-							<PrimaryButton startIcon={<Update />}>
-								ATUALIZAR
-							</PrimaryButton>
+							
 						</RefreshArea>
 						<Box>
 							{actualPet !== {} && (

@@ -10,27 +10,41 @@ const CardControl = (props) => {
 	return (
 		<>
 			<ContentCard
-				onClick={() => console.log(props.id)}
+				onClick={  () => {  
+
+					window.Intercom('showNewMessage')			
+					//Intercom('showNewMessage');
+
+				 } }
 				onMouseOver={(e) => {
 					e.preventDefault()
 					setHighlight(!highlight)
 				}} onMouseOut={(e) => {
 					e.preventDefault()
 					setHighlight(!highlight)
-				}} highlight={highlight} regularity={props.regularity}>
+				}} highlight={highlight} severity={props.severity}>
 				<div className="column">
 					<span className="title">
 						{props.name}
 					</span>
-					<span className="last-dose">
-						Última dose: <span className='emphasis'>{props.lastDose}</span>
-					</span>
+					{props.lastDose ? (
+						<span className="last-dose">
+							Última dose: <span className='emphasis'>{props.lastDose}</span>
+						</span>
+					) : (
+						<span className="last-dose">
+							Ainda não foi cadastrada
+						</span>
+					)}
 				</div>
 				{props.hasStartedProtocol ? (
+					
 					<>
+					{ props.regularity != 'once' && (
+						<>
 						<div className="details">
 							<ProgressLine >
-								<Status progress={props.progress} regularity={props.regularity} />
+								<Status progress={props.progress} severity={props.severity} />
 							</ProgressLine>
 							<span className="time">
 								{props.time}
@@ -39,12 +53,17 @@ const CardControl = (props) => {
 								dia(s)
 							</span>
 						</div>
-						<ChevronRight sx={{ color: '#C6CDD3' }} />
+						</>
+						)}
+						<div className="details-btn">
+							<ChevronRight sx={{ color: '#C6CDD3' }} />
+						</div>
 					</>
+					
 				) : (
 					<div className="details">
-						<SecondaryButton>
-							INICIAR PROTOCOLO
+						<SecondaryButton uppercase>
+							Iniciar protocolo
 						</SecondaryButton>
 					</div>
 				)}

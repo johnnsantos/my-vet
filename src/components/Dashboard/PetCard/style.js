@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { theme } from '../../../utils/theme'
 
 export const EditArea = styled.div`
-float: right;
+float: left;
 padding: 10px;
 `
 

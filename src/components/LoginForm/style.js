@@ -34,7 +34,7 @@ export const CardWrapper = styled.div`
 		margin-right: 15px;
 		.dog-image {
 			margin-bottom: 15px;
-			width: 100%;
+			max-width: 100%;
 			@media screen and (max-width: 768px) {
 				width: 80%;
 			}
@@ -54,7 +54,9 @@ export const CardWrapper = styled.div`
 		flex-flow: column nowrap;
 		align-items: flex-start;
 		justify-content: center;
-
+		@media screen and (max-width: 768px) {
+			align-items: center;
+		}
 	.title {
 		font-size: 20px;
 		font-weight: 500;
@@ -78,12 +80,18 @@ export const CardWrapper = styled.div`
 		@media screen and (max-width: 950px) {
 			min-height: 100px;
 		}
+		@media screen and (max-width: 768px) {
+			min-height: auto;
+		}
 	}
 }
 	.support {
 		text-align: center;
 		margin-top: 5vh;
 		font-weight: 500;
+		@media screen and (max-width: 768px) {
+			display: none;
+		}
 	}
 `
 
@@ -94,7 +102,7 @@ export const StyledCard = styled(Card)`
 	align-items: flex-start;
 	@media screen and (max-width: 950px) {
 		flex-flow: column;
-		padding: 50px 20px 50px;
+		padding: 35px 20px 35px;
 	}
 `
 

@@ -25,12 +25,16 @@ const style = {
 const PetManagement = (props) => {
 	const history = useHistory()
 	const [open, setOpen] = useState(false)
-	const handleOpen = () => setOpen(true)
+	//const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
 	const [pets, setPets] = useState([])
 
 	const handlePetPage = (id) => {
 		history.push(`/pet/${id}`)
+	}
+
+	const handleOpen = () => {
+		window.Intercom('show');
 	}
 
 	useEffect(() => {
@@ -43,10 +47,9 @@ const PetManagement = (props) => {
 			<StyledGrid
 				container
 				direction="row"
-				justifyContent="flex-start"
+				justifyContent="space-between"
 				alignItems="flex-start"
 				spacing={3}
-				sx={{ margin: '0 auto' }}
 			>
 				<Modal
 					open={open}
@@ -64,8 +67,8 @@ const PetManagement = (props) => {
 					</Box>
 				</Modal>
 				<PetControl>
-					<PrimaryButton onClick={handleOpen} startIcon={<AddCircle />}>
-						ADICIONAR NOVO PET
+					<PrimaryButton uppercase onClick={ handleOpen } startIcon={<AddCircle />}>
+						Adicionar novo pet
 					</PrimaryButton>
 				</PetControl>
 				{pets.length === 0 ? (

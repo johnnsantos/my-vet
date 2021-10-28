@@ -41,7 +41,7 @@ export const DisableAccount = styled.div`
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: center;
-	justify-content: flex-end;
+	justify-content: flex-start;
 	min-height: 70px;
 	width: 100%;
 	margin-top: 20px;

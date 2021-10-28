@@ -6,6 +6,7 @@ export const mockData = {
 	userInfo: {
 		id: 1515,
 		token: 'TOKENEXEMPLOTESTEloORemIPsuummSSOSO23843423**--23nfkd',
+		username: 'cirobottini',
 		name: 'Ciro Bottini',
 		profile: 'Tutor',
 		photoName: 'img_ciro.jpg',
@@ -17,32 +18,35 @@ export const mockData = {
 	userPets: [{
 		id: 1,
 		photo: null,
-		name: 'Rex',
+		name: 'Nina',
 		specie: 'dog',
-		sex: 'Macho castrado',
-		breed: 'Affegan hound',
-		weight: 13,
-		age: 5,
+		sex: 'Fêmea castrada',
+		breed: 'SRD sem raça definida',
+		weight: 14.6,
+		age: 4,
 		healthy: false,
+		owner: "Ciro Bottini",
 		controls: {
 			parasites: [
 				{
 					id: 1,
 					name: 'Vermífugo',
-					lastDose: 'Nome do produto - 4 out 2021',
-					progress: 70,
+					lastDose: 'Helfine Plus Cães - 26 jun 2021',
+					progress: 100,
+					severity: 'critical',
 					regularity: 'regular',
-					time: '30',
+					time: '00',
 					highlight: true,
 					hasStartedProtocol: true
 				},
 				{
 					id: 2,
 					name: 'Pulgas e carrapatos',
-					lastDose: 'Nome do produto - 4 out 2021',
-					progress: 30,
-					regularity: 'warning',
-					time: '01',
+					lastDose: 'Seresto - 8 mar 2021',
+					progress: 70,
+					severity: 'warning',
+					regularity: 'regular',
+					time: '35',
 					highlight: false,
 					hasStartedProtocol: true
 				}
@@ -51,8 +55,9 @@ export const mockData = {
 				{
 					id: 1,
 					name: 'Antirrábica ',
-					lastDose: 'Nome do produto - 4 out 2021',
-					progress: 70,
+					lastDose: 'Nobivac Raiva - 14 abr 2021',
+					progress: 60,
+					severity: 'success',
 					regularity: 'regular',
 					time: '180',
 					highlight: true,
@@ -61,52 +66,57 @@ export const mockData = {
 				{
 					id: 2,
 					name: 'Leishmaniose',
-					lastDose: 'Nome do produto - 4 out 2021',
+					lastDose: 'LeishTec - 02  jun  2021',
 					progress: 30,
-					regularity: 'warning',
-					time: '02',
+					severity: 'success',
+					regularity: 'regular',
+					time: '216',
 					highlight: false,
 					hasStartedProtocol: true
 				},
 				{
 					id: 3,
 					name: 'Múltipla ou Polivalente (V8/V10)',
-					lastDose: 'Nome do produto - 4 out 2021',
+					lastDose: 'Nobivac DHPPi+L - 14  abr  2021',
 					progress: 30,
-					regularity: 'warning',
-					time: '02',
+					severity: 'success',
+					regularity: 'regular',
+					time: '216',
 					highlight: false,
-					hasStartedProtocol: false
+					hasStartedProtocol: true
 				},
 				{
 					id: 4,
 					name: 'Tosse dos Canis',
-					lastDose: 'Nome do produto - 4 out 2021',
-					progress: 70,
-					regularity: 'success',
-					time: '180',
+					lastDose: 'Nobivac KC - 02 jun 2021',
+					progress: 60,
+					severity: 'success',
+					regularity: 'regular',
+					time: '183',
 					highlight: false,
 					hasStartedProtocol: true
 				},
 				{
 					id: 5,
 					name: 'Giárdia',
-					lastDose: 'Nome do produto - 4 out 2021',
+					lastDose: undefined,
 					progress: 70,
-					regularity: 'success',
-					time: '180',
-					highlight: false,
-					hasStartedProtocol: true
-				},
-				{
-					id: 6,
-					name: 'Dirofilariose',
-					lastDose: 'Nome do produto - 4 out 2021',
-					progress: 70,
-					regularity: 'success',
+					severity: 'success',
+					regularity: 'regular',
 					time: '180',
 					highlight: false,
 					hasStartedProtocol: false
+				},
+				{
+					id: 6,
+					name: 'Puppy',
+					lastDose: 'Nobivac Puppy DP - 07 fev 2018',
+					progress: 70,
+					severity: 'success',
+					regularity: 'once',
+					time: '180',
+					highlight: false,
+					hasStartedProtocol: true
 				}
 			]
 		}
@@ -121,6 +131,7 @@ export const mockData = {
 		weight: '07',
 		age: 6.7,
 		healthy: true,
+		owner: "Ciro Bottini",
 		controls: {
 			parasites: [
 				{
@@ -128,6 +139,7 @@ export const mockData = {
 					name: 'Vermífugo',
 					lastDose: 'Nome do produto - 4 out 2021',
 					progress: 70,
+					severity: 'regular',
 					regularity: 'regular',
 					time: '30',
 					highlight: true,
@@ -138,7 +150,8 @@ export const mockData = {
 					name: 'Pulgas e carrapatos',
 					lastDose: 'Nome do produto - 4 out 2021',
 					progress: 30,
-					regularity: 'warning',
+					severity: 'warning',
+					regularity: 'regular',
 					time: '01',
 					highlight: false,
 					hasStartedProtocol: true
@@ -150,6 +163,7 @@ export const mockData = {
 					name: 'Antirrábica ',
 					lastDose: 'Nome do produto - 4 out 2021',
 					progress: 70,
+					severity: 'regular',
 					regularity: 'regular',
 					time: '180',
 					highlight: true,
@@ -160,7 +174,8 @@ export const mockData = {
 					name: 'Leishmaniose',
 					lastDose: 'Nome do produto - 4 out 2021',
 					progress: 30,
-					regularity: 'warning',
+					severity: 'warning',
+					regularity: 'regular',
 					time: '02',
 					highlight: false,
 					hasStartedProtocol: true
@@ -170,7 +185,8 @@ export const mockData = {
 					name: 'Múltipla ou Polivalente (V8/V10)',
 					lastDose: 'Nome do produto - 4 out 2021',
 					progress: 30,
-					regularity: 'warning',
+					severity: 'warning',
+					regularity: 'regular',
 					time: '02',
 					highlight: false,
 					hasStartedProtocol: false
@@ -180,7 +196,8 @@ export const mockData = {
 					name: 'Tosse dos Canis',
 					lastDose: 'Nome do produto - 4 out 2021',
 					progress: 70,
-					regularity: 'success',
+					severity: 'success',
+					regularity: 'regular',
 					time: '180',
 					highlight: false,
 					hasStartedProtocol: true
@@ -190,7 +207,8 @@ export const mockData = {
 					name: 'Giárdia',
 					lastDose: 'Nome do produto - 4 out 2021',
 					progress: 70,
-					regularity: 'success',
+					severity: 'success',
+					regularity: 'regular',
 					time: '180',
 					highlight: false,
 					hasStartedProtocol: true
@@ -200,7 +218,114 @@ export const mockData = {
 					name: 'Dirofilariose',
 					lastDose: 'Nome do produto - 4 out 2021',
 					progress: 70,
-					regularity: 'success',
+					severity: 'success',
+					regularity: 'regular',
+					time: '180',
+					highlight: false,
+					hasStartedProtocol: false
+				}
+			]
+		}
+	},
+	{
+		id: 3,
+		photo: null,
+		name: 'Steve',
+		specie: 'dog',
+		sex: 'Macho castrado',
+		breed: 'Afghan hound',
+		weight: 13,
+		age: 7,
+		healthy: false,
+		owner: "Ciro Bottini",
+		controls: {
+			parasites: [
+				{
+					id: 1,
+					name: 'Vermífugo',
+					lastDose: 'Nome do produto - 4 out 2021',
+					progress: 70,
+					severity: 'regular',
+					regularity: 'regular',
+					time: '30',
+					highlight: true,
+					hasStartedProtocol: true
+				},
+				{
+					id: 2,
+					name: 'Pulgas e carrapatos',
+					lastDose: 'Nome do produto - 4 out 2021',
+					progress: 30,
+					severity: 'warning',
+					regularity: 'regular',
+					time: '01',
+					highlight: false,
+					hasStartedProtocol: true
+				}
+			],
+			vaccines: [
+				{
+					id: 1,
+					name: 'Antirrábica ',
+					lastDose: 'Nome do produto - 4 out 2021',
+					progress: 70,
+					severity: 'regular',
+					regularity: 'regular',
+					time: '180',
+					highlight: true,
+					hasStartedProtocol: true
+				},
+				{
+					id: 2,
+					name: 'Leishmaniose',
+					lastDose: 'Nome do produto - 4 out 2021',
+					progress: 30,
+					severity: 'warning',
+					regularity: 'regular',
+					time: '02',
+					highlight: false,
+					hasStartedProtocol: true
+				},
+				{
+					id: 3,
+					name: 'Múltipla ou Polivalente (V8/V10)',
+					lastDose: 'Nome do produto - 4 out 2021',
+					progress: 30,
+					severity: 'warning',
+					regularity: 'regular',
+					time: '02',
+					highlight: false,
+					hasStartedProtocol: false
+				},
+				{
+					id: 4,
+					name: 'Tosse dos Canis',
+					lastDose: 'Nome do produto - 4 out 2021',
+					progress: 70,
+					severity: 'success',
+					regularity: 'regular',
+					time: '180',
+					highlight: false,
+					hasStartedProtocol: true
+				},
+				{
+					id: 5,
+					name: 'Giárdia',
+					lastDose: 'Nome do produto - 4 out 2021',
+					progress: 70,
+					severity: 'success',
+					regularity: 'regular',
+					time: '180',
+					highlight: false,
+					hasStartedProtocol: true
+				},
+				{
+					id: 6,
+					name: 'Dirofilariose',
+					lastDose: 'Nome do produto - 4 out 2021',
+					progress: 70,
+					severity: 'success',
+					regularity: 'regular',
 					time: '180',
 					highlight: false,
 					hasStartedProtocol: false

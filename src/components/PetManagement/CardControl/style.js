@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 
 export const ContentCard = styled.div`
-cursor: pointer;
-padding: 30px 50px;
-background-color: ${props => props.highlight ? 'rgba(236, 244, 251, 1)' : 'transparent'};
-box-shadow: ${props => props.highlight ? '1px 1px 8px rgba(74, 80, 86, 0.4)' : 'transparent'};
-display: flex;
-flex-flow: row nowrap;
-align-items: center;
-justify-content: center;
+	cursor: pointer;
+	padding: 30px 50px;
+	background-color: ${props => props.highlight ? 'rgba(236, 244, 251, 1)' : 'transparent'};
+	box-shadow: ${props => props.highlight ? '1px 1px 8px rgba(74, 80, 86, 0.4)' : 'transparent'};
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: space-between;
 
 @media screen and (max-width: 736px) {
 	flex-flow: row wrap;
@@ -54,11 +54,14 @@ justify-content: center;
 	align-items: center;
 	justify-content: flex-end;
 	color: ${props => {
-		switch (props.regularity) {
+		switch (props.severity) {
 			case 'regular':
 				return '#3B87D3';
 
 			case 'warning':
+				return '#FFB400';
+
+			case 'critical':
 				return '#E36360';
 
 			case 'success':
@@ -73,9 +76,12 @@ justify-content: center;
 		margin: 0 15px 0;
 	}
 	@media screen and (max-width: 736px) {
-	width: 80%;
-	margin-top: 15px;
-}
+		&-btn {
+			display: none;
+		}
+		width: 100%;
+		margin-top: 15px;
+	}
 }
 `
 
@@ -91,11 +97,14 @@ width: ${props => `${props.progress}%`};
 height: 8px;
 border-radius: 10px;
 background-color: ${props => {
-		switch (props.regularity) {
+		switch (props.severity) {
 			case 'regular':
 				return '#3B87D3';
 
 			case 'warning':
+				return '#FFB400';
+
+			case 'critical':
 				return '#E36360';
 
 			case 'success':

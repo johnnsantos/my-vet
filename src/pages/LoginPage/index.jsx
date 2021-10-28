@@ -1,9 +1,16 @@
 import LoginForm from '../../components/LoginForm'
 import { StyledGrid } from './style'
-import { Grid } from '@material-ui/core'
+import Grid from "@material-ui/core/Grid";
 import Footer from '../../components/LoginForm/Footer'
 
 const LoginPage = () => {
+	
+	window.intercomSettings = {
+		app_id: 'avzy2hbm',
+	};
+	
+	window.Intercom('update');	
+
 	return (
 		<StyledGrid
 			container
@@ -13,7 +20,7 @@ const LoginPage = () => {
 			<Grid item xs={10} md={8} lg={8}>
 				<LoginForm />
 			</Grid>
-			<Grid item xs={10} md={8} lg={8}>
+			<Grid item xs={12} md={8} lg={8}>
 				<Footer />
 			</Grid>
 		</StyledGrid >

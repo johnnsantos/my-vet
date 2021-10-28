@@ -1,5 +1,5 @@
 import logoFull from '../../assets/images/logoFull.svg'
-import dog from '../../assets/images/LoginForm/dog.png'
+import loginImg from '../../assets/images/login-img.svg'
 import { CardWrapper, StyledCard, CustomInput } from './style'
 import { PrimaryButton, SecondaryButton, CustomLink } from '../../utils/theme'
 import { useDispatch } from 'react-redux'
@@ -65,6 +65,7 @@ const LoginForm = () => {
 	}
 
 	const submitForm = formData => {
+
 		const newState = formValues
 		newState.formState = formData
 
@@ -139,14 +140,14 @@ const LoginForm = () => {
 						<Grid container spacing={3}>
 							<Grid item lg="6" xs="12">
 								<div className="promo">
-									<img alt='Saúde do Pet' className='dog-image' src={dog} />
+									<img alt='Saúde do Pet' className='dog-image' src={loginImg} />
 									<span>
 										Nunca mais se esqueça das datas mais importantes
 										para a saúde do seu pet!
 									</span>
 								</div>
 							</Grid>
-							<Grid item lg="6">
+							<Grid item lg="6" xs="12">
 								<div className="form-login">
 									<Formik
 										initialValues={formValues.formState}

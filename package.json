@@ -27,7 +27,9 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.0.1",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "react-script-tag": "^1.1.2"
+
   },
   "scripts": {
     "start": "react-scripts start",
