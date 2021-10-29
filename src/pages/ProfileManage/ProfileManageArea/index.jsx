@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux"
 import { handleUserThunk } from "../../../redux/modules/user/thunks";
 import { Formik } from 'formik'
 import * as Yup from 'yup'
+import InputMask from "react-input-mask";
 
 const style = {
 	position: 'absolute',
@@ -31,13 +32,12 @@ const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 	const history = useHistory();
 	const [profile, setProfile] = useState('Tutor')
 	const [modalOpen, setModalOpen] = useState(false)
-
 	const [formValues, setFormValues] = useState({
 		formState: {
 			name: 'Ciro Bottini',
 			email: 'c.bot@email.com',
-			cellphone: '5533333333333',
-			born: '23 agosto de 1976',
+			cellphone: '(31) 9 9955-4452',
+			born: '23/08/1976',
 			photoName: 'img_ciro.jpg'
 		},
 		isSubmitting: false,
@@ -82,13 +82,13 @@ const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 	}) => {
 		return (
 			<>
-				<form onSubmit={handleSubmit} noValidate>
+				<form onSubmit={handleSubmit}>
 					<div className='wrapper'>
 						<div className='image-upload'>
 							<input type="file" id="imgupload" style={{ display: "none" }} />
 							<TextField
 								value={values.photoName}
-								error={errors.email}
+								error={!!errors.email}
 								onBlur={handleBlur}
 								touched={touched.email}
 								onClick={handleUpload}
@@ -114,7 +114,7 @@ const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 						<div className="row">
 							<TextField
 								helperText={errors.name ? errors.name : ''}
-								error={errors.name}
+								error={!!errors.name}
 								onBlur={handleBlur}
 								touched={touched.name}
 								value={values.name}
@@ -143,23 +143,34 @@ const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 							</Box>
 						</div>
 						<div className="row">
-							<TextField
-								helperText={errors.cellphone ? errors.cellphone : ''}
-								sx={{ width: '100%', '& .MuiFormHelperText-root': { marginLeft: 0 } }}
-								label="Celular"
-								error={errors.cellphone}
-								onBlur={handleBlur}
-								touched={touched.cellphone}
-								value={values.cellphone}
+							<InputMask
+								mask="\(99\) 9 9999-9999"
 								onChange={handleChange}
-								id='cellphone'
-								name='cellphone'
-							/>
+								onBlur={handleBlur}
+								value={values.cellphone}
+								disabled={false}
+								maskPlaceholder="_"
+							>
+								{(inputProps) =>
+									<TextField
+										error={!!errors.cellphone}
+										helperText={errors.cellphone && errors.cellphone}
+										touched={touched.cellphone}
+										sx={{ width: '100%', '& .MuiFormHelperText-root': { marginLeft: 0 } }}
+										label="Celular"
+										id='cellphone'
+										name='cellphone'
+										type='tel'
+										disableUnderline
+										{...inputProps}
+									/>
+								}
+							</InputMask>
 							<TextField
 								helperText={errors.email ? errors.email : ''}
 								sx={{ width: '100%', '& .MuiFormHelperText-root': { marginLeft: 0 } }}
 								label="E-mail"
-								error={errors.email}
+								error={!!errors.email}
 								onBlur={handleBlur}
 								touched={touched.email}
 								value={values.email}
@@ -169,22 +180,30 @@ const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 							/>
 						</div>
 						<div className="row">
-							<TextField
-								sx={{ width: '100%', '& .MuiFormHelperText-root': { marginLeft: 0 } }}
-								label="Data de nascimento"
-								error={errors.born}
-								onBlur={handleBlur}
-								touched={touched.born}
-								value={values.born}
+							<InputMask
+								mask="99\/99\/9999"
 								onChange={handleChange}
-								id='born'
-								name='born'
-								helperText={errors.born ? errors.born : ''}
-							/>
+								onBlur={handleBlur}
+								value={values.born}
+								disabled={false}
+								maskPlaceholder="_"
+							>
+								{(inputProps) =>
+									<TextField
+										sx={{ width: '100%', '& .MuiFormHelperText-root': { marginLeft: 0 } }}
+										label="Data de nascimento"
+										error={!!errors.born}
+										touched={touched.born}
+										id='born'
+										name='born'
+										helperText={errors.born ? errors.born : ''}
+									/>
+								}
+							</InputMask>
 							<div style={{ content: '', width: '100%' }}></div>
 						</div>
 						<div className="row-submit">
-							<SaveButton>
+							<SaveButton type='submit'>
 								SALVAR
 							</SaveButton>
 						</div>
@@ -231,6 +250,8 @@ const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 							Perfil do pet
 						</span>
 						<Formik
+							validateOnChange
+							validateOnBlur
 							initialValues={formValues.formState}
 							// enableReinitialize
 							onSubmit={submitForm}
@@ -239,11 +260,13 @@ const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 								email: Yup.string()
 									.email('Por favor, insira um e-mail válido')
 									.required('Por favor, insira um e-mail'),
+								photoName: Yup.string(),
 								cellphone: Yup.string()
-									.matches(/^\([0-9]{2}\) [0-9]{5}-[0-9]{4}$/, 'Por favor, insira um celular válido')
-									.required('Por favor, insira um celular'),
+									.required('Por favor, insira um celular')
+									.matches(/^1\d\d(\d\d)?$|^0800 ?\d{3} ?\d{4}$|^(\(0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d\) ?|0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d[ .-]?)?(9|9[ .-])?[2-9]\d{3}[ .-]?\d{4}$/gm, 'Por favor, insira um celular válido'),
 								born: Yup.string()
-									.required('Por favor, insira uma data de nascimento'),
+									.required('Por favor, insira uma data de nascimento')
+									.matches(/^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/gm, 'Por favor, insira uma data de nascimento válida'),
 								name: Yup.string()
 									.required('Por favor, insira um nome'),
 							})}
