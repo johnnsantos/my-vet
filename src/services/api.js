@@ -1,25 +1,25 @@
 import axios from "axios"
 
-const baseURL = "api"
+const baseURL = "http://3.82.165.166/api/v1"
 
 export const isAuthenticated = () => {
-  return window.localStorage.getItem("authorizationToken") !== null
+  return window.localStorage.getItem("accessToken") !== null
 }
 
 export const token = () => {
-  return window.localStorage.getItem("authorizationToken")
+  return window.localStorage.getItem("accessToken")
 }
 
 export const requestTokenByEmail = async (email) => {
-  let res = await axios.post(`${baseURL}/login`, email)
-  window.localStorage.setItem("authorizationToken", res.data.userInfo.token)
-  window.localStorage.setItem("email", res.data.userInfo.email)
-  return (
-    res.status === 201 && {
-      data: res.data,
-      message: "Login efetuado com sucesso",
-    }
-  );
+  return await axios.post(`${baseURL}/code-validation/send-invite`, email)
+}
+
+export const validateEmailToken = async (token) => {
+  return await axios.post(`${baseURL}/code-validation/validate`, { token: token })
+}
+
+export const retrieveAnimals = async (accessToken) => {
+  return await axios.get(`${baseURL}/animal/my-list`, { headers: { Authorization: `Bearer ${accessToken}` } });
 }
 
 export const requestEditProfile = async (data) => {

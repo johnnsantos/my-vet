@@ -9,6 +9,7 @@ import EmptyBanner from "../EmptyBanner"
 import { useEffect } from "react"
 import { useHistory } from "react-router"
 import { Container } from "@material-ui/core"
+import { useSelector } from "react-redux"
 
 const style = {
 	position: 'absolute',
@@ -23,11 +24,13 @@ const style = {
 };
 
 const PetManagement = (props) => {
+	const [loading, setLoading] = useState(true)
+	const [animalListArray, setAnimalListArray] = useState([])
+	const { animalsList } = useSelector((state) => state.Animals);
 	const history = useHistory()
 	const [open, setOpen] = useState(false)
 	//const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
-	const [pets, setPets] = useState([])
 
 	const handlePetPage = (id) => {
 		history.push(`/pet/${id}`)
@@ -38,9 +41,16 @@ const PetManagement = (props) => {
 	}
 
 	useEffect(() => {
-		let { userPets } = JSON.parse(localStorage.getItem('userInfo'))
-		setPets(userPets)
+		console.log(animalsList)
+		if (animalsList) {
+			setAnimalListArray(animalsList)
+			setLoading(false)
+		}
 	}, [])
+
+	if (loading) {
+		return <h1>Loading</h1>
+	}
 
 	return (
 		<Container>
@@ -67,15 +77,15 @@ const PetManagement = (props) => {
 					</Box>
 				</Modal>
 				<PetControl>
-					<PrimaryButton uppercase onClick={ handleOpen } startIcon={<AddCircle />}>
+					<PrimaryButton uppercase onClick={handleOpen} startIcon={<AddCircle />}>
 						Adicionar novo pet
 					</PrimaryButton>
 				</PetControl>
-				{pets.length === 0 ? (
+				{animalListArray.length === 0 ? (
 					<EmptyBanner />
 				) : (
 					<>
-						{pets.map((pet) => (
+						{animalListArray.map((pet) => (
 							<Grid key={pet.id} item xs={12} sm={12} md={6} lg={4} onClick={() => handlePetPage(pet.id)}>
 								<PetCard {...pet} />
 							</Grid>
