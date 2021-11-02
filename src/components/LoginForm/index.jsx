@@ -64,7 +64,7 @@ const LoginForm = () => {
 				successHandler()
 			})
 			.catch((err) => {
-				console.log(error)
+				console.log(err)
 				errorHandler(err)
 			})
 	}

@@ -21,5 +21,5 @@ const signupIntercom = (userInfo) => {
 export const handleUserThunk = (userInfo) => async (dispatch, _getState) => {
 	dispatch(handleUser(userInfo));
 	localStorage.setItem('userInfo', JSON.stringify(userInfo))
-	signupIntercom(userInfo.userInfo)
+	signupIntercom(userInfo)
 };

@@ -7,6 +7,8 @@ import { Provider } from "react-redux";
 import store from "./redux";
 import { Server, Response } from 'miragejs'
 import { mockData } from './mock'
+import ScriptTag from 'react-script-tag';
+import intercom from './assets/js/intercom'
 
 // new Server({
 //   routes() {
@@ -29,6 +31,7 @@ ReactDOM.render(
         <App />
       </BrowserRouter>
     </Provider>
+    <ScriptTag type="text/javascript" src={intercom} />
   </>,
   document.getElementById('root')
 );
