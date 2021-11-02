@@ -1,14 +1,15 @@
+import { useState } from 'react'
+import { Formik } from 'formik'
+import { Redirect } from 'react-router'
+import * as Yup from 'yup'
 import logoFull from '../../assets/images/logoFull.svg'
 import loginImg from '../../assets/images/login-img.svg'
 import { CardWrapper, StyledCard, CustomInput } from './style'
 import { PrimaryButton, SecondaryButton, CustomLink } from '../../utils/theme'
-import { Redirect } from 'react-router'
 import { requestTokenByEmail } from '../../services/api'
-import { useState } from 'react'
 import { CircularProgress } from '@mui/material'
 import { Grid } from '@material-ui/core'
-import { Formik } from 'formik'
-import * as Yup from 'yup'
+
 
 const LoginForm = () => {
 	const [authenticated, setAuthenticated] = useState(false)
@@ -101,11 +102,11 @@ const LoginForm = () => {
 						{isSubmitting ? (
 							<CircularProgress />
 						) : (
-							<PrimaryButton uppercase type='submit' isHome variant="contained">
+							<PrimaryButton type='submit' isHome variant="contained">
 								Receber link de acesso
 							</PrimaryButton>
 						)}
-						{/* <SecondaryButton uppercase isHome>
+						{/* <SecondaryButton isHome>
 							Criar o perfil do meu pet
 						</SecondaryButton> */}
 					</div>

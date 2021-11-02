@@ -1,27 +1,27 @@
+import { useEffect, useState } from "react"
+import { useHistory } from "react-router"
+import { useDispatch } from "react-redux"
 import { Header, MobileMenu, DrawerHeader } from "./style"
 import logoHeader from '../../../assets/images/Header/logoHeader.png'
 import logoMobile from '../../../assets/images/Header/logoMobile.png'
-import { Avatar, Menu, MenuItem, ListItemIcon, Container, Grid } from "@material-ui/core"
-import { useEffect, useState } from "react"
-import { Settings, Logout } from "@mui/icons-material"
+import { Avatar, Menu, MenuItem, ListItemIcon, Container, Grid, IconButton } from "@material-ui/core"
+import { Settings, Logout, MenuIcon, ChevronLeft } from "@mui/icons-material"
 import Drawer from '@mui/material/Drawer';
-import { IconButton } from "@material-ui/core"
-import MenuIcon from '@mui/icons-material/Menu'
-import { ChevronLeft } from "@mui/icons-material"
 import { RouterLink } from "../../../utils/theme"
-import { useHistory } from "react-router"
-import { useDispatch } from "react-redux"
 import { handleUserThunk } from "../../../redux/modules/user/thunks"
+import { logoutUser, retrieveUserInfo, token } from "../../../services/api"
+import { useSelector } from "react-redux"
 
-const drawerWidth = 200;
+// const drawerWidth = 200
 
 const DashboardHeader = () => {
-	const [name, setName] = useState('')
-	const [photoUrl, setPhotoUrl] = useState('')
-	const [anchorEl, setAnchorEl] = useState(null)
-	const [openDrawer, setOpenDrawer] = useState(false)
-	const history = useHistory()
+	// const history = useHistory()
 	const dispatch = useDispatch()
+
+	const [anchorEl, setAnchorEl] = useState(null)
+	// const [openDrawer, setOpenDrawer] = useState(false)
+
+	const { userLogged } = useSelector(state => state.User)
 
 	const open = Boolean(anchorEl)
 
@@ -33,24 +33,27 @@ const DashboardHeader = () => {
 		setAnchorEl(null)
 	}
 
-	const handleDrawerOpen = () => {
-		setOpenDrawer(true)
-	};
+	// const handleDrawerOpen = () => {
+	// 	setOpenDrawer(true)
+	// };
 
-	const handleDrawerClose = () => {
-		setOpenDrawer(false)
-	}
-
-	const handleLogout = () => {
-		window.localStorage.clear();
-		dispatch(handleUserThunk([]));
-		history.push('/login')
-	}
+	// const handleDrawerClose = () => {
+	// 	setOpenDrawer(false)
+	// }
 
 	useEffect(() => {
-		let { userInfo } = JSON.parse(localStorage.getItem('userInfo'))
-		setName(userInfo.name)
-		setPhotoUrl(userInfo.photoUrl)
+		try {
+			retrieveUserInfo(token())
+				.then(res => {
+					dispatch(handleUserThunk(res.data))
+				})
+				.catch(err => {
+					console.log(err)
+					logoutUser()
+				})
+		} catch (error) {
+			console.log(error)
+		}
 	}, [])
 
 	return (
@@ -102,11 +105,11 @@ const DashboardHeader = () => {
 						</RouterLink>
 						<div onClick={handleClick} className="user-profile">
 							<Avatar
-								alt={name}
-								src={photoUrl}
+								alt={userLogged.first_name}
+								src={userLogged.first_name}
 							/>
 							<span className="username">
-								{name}
+								{userLogged.first_name}
 							</span>
 						</div>
 					</Grid>
@@ -130,7 +133,7 @@ const DashboardHeader = () => {
 							Meu perfil
 						</RouterLink>
 					</MenuItem>
-					<MenuItem onClick={handleLogout}>
+					<MenuItem onClick={logoutUser}>
 						<ListItemIcon>
 							<Logout fontSize="small" />
 						</ListItemIcon>

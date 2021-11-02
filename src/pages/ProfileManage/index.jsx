@@ -1,18 +1,40 @@
-import { Container, Grid } from "@material-ui/core"
+import { useEffect, useState } from "react"
+import { Container, Grid, CircularProgress } from "@material-ui/core"
 import DashboardHeader from "../../components/Dashboard/DashboardHeader"
 import DashboardMenu from "../../components/Dashboard/DashboardMenu"
 import PageName from "../../components/Dashboard/PageName"
 import CardProfile from "./CardProfile"
 import ProfileManageArea from "./ProfileManageArea"
-import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 
 const ProfileManage = () => {
+	const [loading, setLoading] = useState(true)
 	const [userInfo, setUserInfo] = useState({})
+	const { userLogged } = useSelector(state => state.User)
 
 	useEffect(() => {
-		let { userInfo } = JSON.parse(localStorage.getItem('userInfo'))
-		setUserInfo(userInfo)
-	}, [])
+		if (userLogged) {
+			setUserInfo(userLogged)
+			setLoading(false)
+		}
+	}, [userLogged])
+
+	if (loading) {
+		return (
+			<Grid
+				container
+				spacing={0}
+				direction="column"
+				alignItems="center"
+				justifyContent="center"
+				style={{ minHeight: '100vh' }}
+			>
+				<Grid item xs={12} sm={12} md={12} lg={12} >
+					<CircularProgress />
+				</Grid>
+			</Grid>
+		)
+	}
 
 	return (
 		<>

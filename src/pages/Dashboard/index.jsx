@@ -1,43 +1,48 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import DashboardHeader from "../../components/Dashboard/DashboardHeader"
 import DashboardMenu from "../../components/Dashboard/DashboardMenu"
 import PageName from "../../components/Dashboard/PageName"
 import PetManagement from "../../components/Dashboard/PetManagement"
 import { useHistory } from "react-router"
-import { retrieveAnimals } from "../../services/api"
+import { logoutUser, retrieveAnimals } from "../../services/api"
 import { useDispatch } from "react-redux"
 import { handleAnimalsThunk } from '../../redux/modules/animals/thunks'
-import { handleUserThunk } from "../../redux/modules/user/thunks"
 
 const Dashboard = () => {
 	const history = useHistory()
 	const dispatch = useDispatch()
+	const [loading, setLoading] = useState(true)
+	const [animalsList, setAnimalsList] = useState([])
 
 	useEffect(() => {
 		let accessToken = history.location.state?.accessToken
 		try {
 			retrieveAnimals(accessToken ? accessToken : localStorage.getItem("accessToken"))
 				.then(res => {
-					console.log(res)
 					dispatch(handleAnimalsThunk(res.data))
+					setLoading(false)
+					setAnimalsList(res.data)
 				})
 				.catch(err => {
-					console.log(err)
+					let errorMessage = err.response.data.messages[0].message
+					console.log(errorMessage)
+					logoutUser()
+					// if (errorMessage.includes("invalid") || errorMessage.includes("expired")) {
+					// logoutUser()
+					// }
 				})
 		} catch (error) {
 			console.log(error)
-			window.localStorage.clear();
-			dispatch(handleUserThunk([]));
-			history.push('/login')
+			logoutUser()
 		}
 	}, [])
 
 	return (
 		<>
-			{/* <DashboardHeader />
+			<DashboardHeader />
 			<DashboardMenu />
-			<PageName name={'Meus pets'} /> */}
-			<PetManagement />
+			<PageName name={'Meus pets'} />
+			<PetManagement loading={loading} animalsList={animalsList} />
 		</>
 	)
 }

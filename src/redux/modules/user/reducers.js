@@ -9,7 +9,9 @@ const User = (state = defaultState, action) => {
 			return { userLogged: userInfo }
 
 		default:
-			return state
+			return {
+				...state,
+			}
 	}
 };
 

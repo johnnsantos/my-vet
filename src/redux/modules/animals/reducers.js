@@ -9,7 +9,9 @@ const Animals = (state = defaultState, action) => {
 			return { animalsList: myAnimals }
 
 		default:
-			return state
+			return {
+				...state
+			}
 	}
 };
 

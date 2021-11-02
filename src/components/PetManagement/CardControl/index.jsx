@@ -10,12 +10,12 @@ const CardControl = (props) => {
 	return (
 		<>
 			<ContentCard
-				onClick={  () => {  
+				onClick={() => {
 
-					window.Intercom('showNewMessage')			
+					window.Intercom('showNewMessage')
 					//Intercom('showNewMessage');
 
-				 } }
+				}}
 				onMouseOver={(e) => {
 					e.preventDefault()
 					setHighlight(!highlight)
@@ -38,31 +38,31 @@ const CardControl = (props) => {
 					)}
 				</div>
 				{props.hasStartedProtocol ? (
-					
+
 					<>
-					{ props.regularity != 'once' && (
-						<>
-						<div className="details">
-							<ProgressLine >
-								<Status progress={props.progress} severity={props.severity} />
-							</ProgressLine>
-							<span className="time">
-								{props.time}
-							</span>
-							<span className="format">
-								dia(s)
-							</span>
-						</div>
-						</>
+						{props.regularity != 'once' && (
+							<>
+								<div className="details">
+									<ProgressLine >
+										<Status progress={props.progress} severity={props.severity} />
+									</ProgressLine>
+									<span className="time">
+										{props.time}
+									</span>
+									<span className="format">
+										dia(s)
+									</span>
+								</div>
+							</>
 						)}
 						<div className="details-btn">
 							<ChevronRight sx={{ color: '#C6CDD3' }} />
 						</div>
 					</>
-					
+
 				) : (
 					<div className="details">
-						<SecondaryButton uppercase>
+						<SecondaryButton>
 							Iniciar protocolo
 						</SecondaryButton>
 					</div>
