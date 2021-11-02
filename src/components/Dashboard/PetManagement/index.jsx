@@ -1,0 +1,90 @@
+import { Grid } from "@mui/material"
+import { PrimaryButton } from "../../../utils/theme"
+import { AddCircle } from "@mui/icons-material"
+import { PetControl, StyledGrid } from './style'
+import { useState } from 'react'
+import { Modal, Box, Typography } from "@mui/material"
+import PetCard from "../PetCard"
+import EmptyBanner from "../EmptyBanner"
+import { useEffect } from "react"
+import { useHistory } from "react-router"
+import { Container } from "@material-ui/core"
+
+const style = {
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	width: '70vw',
+	maxWidth: 400,
+	bgcolor: 'background.paper',
+	boxShadow: 24,
+	p: 4,
+};
+
+const PetManagement = (props) => {
+	const history = useHistory()
+	const [open, setOpen] = useState(false)
+	//const handleOpen = () => setOpen(true)
+	const handleClose = () => setOpen(false)
+	const [pets, setPets] = useState([])
+
+	const handlePetPage = (id) => {
+		history.push(`/pet/${id}`)
+	}
+
+	const handleOpen = () => {
+		window.Intercom('show');
+	}
+
+	useEffect(() => {
+		let { userPets } = JSON.parse(localStorage.getItem('userInfo'))
+		setPets(userPets)
+	}, [])
+
+	return (
+		<Container>
+			<StyledGrid
+				container
+				direction="row"
+				justifyContent="space-between"
+				alignItems="flex-start"
+				spacing={3}
+			>
+				<Modal
+					open={open}
+					onClose={handleClose}
+					aria-labelledby="modal-modal-title"
+					aria-describedby="modal-modal-description"
+				>
+					<Box sx={style}>
+						<Typography id="modal-modal-title" variant="h6" component="h2">
+							Adicionar novo pet
+						</Typography>
+						<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+							Formulário de adicionar pet.
+						</Typography>
+					</Box>
+				</Modal>
+				<PetControl>
+					<PrimaryButton uppercase onClick={ handleOpen } startIcon={<AddCircle />}>
+						Adicionar novo pet
+					</PrimaryButton>
+				</PetControl>
+				{pets.length === 0 ? (
+					<EmptyBanner />
+				) : (
+					<>
+						{pets.map((pet) => (
+							<Grid key={pet.id} item xs={12} sm={12} md={6} lg={4} onClick={() => handlePetPage(pet.id)}>
+								<PetCard {...pet} />
+							</Grid>
+						))}
+					</>
+				)}
+			</StyledGrid>
+		</Container>
+	)
+}
+
+export default PetManagement
