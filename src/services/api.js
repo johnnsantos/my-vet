@@ -2,11 +2,6 @@ import axios from "axios"
 
 const baseURL = "http://3.82.165.166/api/v1"
 
-export const logoutUser = () => {
-  localStorage.clear()
-  location.href = '/login'
-}
-
 export const isAuthenticated = () => {
   return localStorage.getItem("accessToken") !== null
 }
@@ -35,6 +30,9 @@ export const updateUserInfo = async (payload, accessToken) => {
   return await axios.post(`${baseURL}/profile/update`, payload, { headers: { Authorization: `Bearer ${accessToken}` } });
 }
 
+export const inactivateAccount = async (accessToken) => {
+  return await axios.get(`${baseURL}/auth/inactive`, { headers: { Authorization: `Bearer ${accessToken}` } });
+}
 
 export const createPet = async (data) => {
   const config = {
@@ -57,3 +55,8 @@ export const requestEditPet = async (id, data) => {
   let res = await axios.put(`${baseURL}/pets/${id}`, data, config);
   return res;
 };
+
+export const logoutUser = () => {
+  localStorage.clear()
+  location.href = '/login'
+}

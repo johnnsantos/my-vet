@@ -4,7 +4,7 @@ import * as Yup from 'yup'
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux"
 import InputMask from "react-input-mask";
-import { logoutUser, token, updateUserInfo } from "../../../services/api";
+import { inactivateAccount, logoutUser, token, updateUserInfo } from "../../../services/api";
 import { handleUserThunk } from "../../../redux/modules/user/thunks";
 import { Card, CardContent, IconButton, Modal, Typography, TextField, InputLabel, FormControl, Select, Box } from "@mui/material"
 import { AttachFile } from "@mui/icons-material";
@@ -54,19 +54,7 @@ const ProfileManageArea = ({ id, username, first_name, last_name, cellphone, ema
 	}
 
 	const disableAccount = () => {
-		let payload = {
-			"id": id,
-			"username": username,
-			"first_name": first_name,
-			"last_name": last_name,
-			"email": email,
-			"is_staff": false,
-			"is_active": true,
-			"phone": cellphone,
-			"type": "N",
-			"inactive_cause": 'Desativar'
-		}
-		updateUserInfo(payload, token())
+		inactivateAccount(token())
 			.then(res => {
 				console.log(res)
 				logoutUser()
