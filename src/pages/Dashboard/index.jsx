@@ -24,8 +24,9 @@ const Dashboard = () => {
 					setAnimalsList(res.data)
 				})
 				.catch(err => {
-					let errorMessage = err.response.data.messages[0].message
-					console.log(errorMessage)
+					// let errorMessage = err.response.data.messages[0].message
+					// console.log(errorMessage)
+					console.log(err)
 					logoutUser()
 					// if (errorMessage.includes("invalid") || errorMessage.includes("expired")) {
 					// logoutUser()

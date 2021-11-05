@@ -11,19 +11,38 @@ import VaccineControl from '../../components/PetManagement/VaccineControl'
 import { Box } from "@mui/system"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
+import { retrieveVaccines, token } from "../../services/api"
 
 const PetPage = () => {
 	const params = useParams()
 	const [actualPet, setActualPet] = useState({})
+	const [isLoading, setIsLoading] = useState(true)
+	const [petVaccines, setPetVaccines] = useState([])
 
 	useEffect(() => {
-		let { userPets } = JSON.parse(localStorage.getItem('userInfo'))
+		retrieveVaccines(token(), params.id)
+			.then(res => {
+				setPetVaccines(res.data)
+				setIsLoading(false)
+			})
+			.catch(err => {
+				console.log(err)
+			})
+	}, [])
+
+	useEffect(() => {
+		let userPets = JSON.parse(localStorage.getItem('animalsList'))
 		for (let pet of userPets) {
 			if (pet.id == params.id) {
 				setActualPet(pet)
+				// setIsLoading(false)
 			}
 		}
 	}, [])
+
+	if (isLoading) {
+		return null
+	}
 
 	return (
 		<>
@@ -43,7 +62,7 @@ const PetPage = () => {
 					</Grid>
 					<Grid item xs={12} sm={12} md={8} lg={9}>
 						<RefreshArea>
-							
+
 						</RefreshArea>
 						<Box>
 							{actualPet !== {} && (
@@ -52,7 +71,7 @@ const PetPage = () => {
 						</Box>
 						<Box mt={10}>
 							{actualPet !== {} && (
-								<VaccineControl {...actualPet} />
+								<VaccineControl petVaccines={petVaccines} />
 							)}
 						</Box>
 					</Grid>

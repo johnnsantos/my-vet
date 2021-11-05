@@ -23,7 +23,6 @@ const style = {
 
 const PetManagement = ({ loading, animalsList }) => {
 	const history = useHistory()
-	const state = useSelector((state) => state)
 	const [open, setOpen] = useState(false)
 
 	//const handleOpen = () => setOpen(true)
@@ -90,7 +89,7 @@ const PetManagement = ({ loading, animalsList }) => {
 					<>
 						{animalsList.map((pet) => (
 							<Grid key={pet.id} item xs={12} sm={12} md={6} lg={4} onClick={() => handlePetPage(pet.id)}>
-								<PetCard {...pet} />
+								<PetCard key={pet.id} {...pet} />
 							</Grid>
 						))}
 					</>

@@ -11,10 +11,8 @@ const CardControl = (props) => {
 		<>
 			<ContentCard
 				onClick={() => {
-
-					window.Intercom('showNewMessage')
+					window.Intercom(props.tagIntercom)
 					//Intercom('showNewMessage');
-
 				}}
 				onMouseOver={(e) => {
 					e.preventDefault()

@@ -34,6 +34,10 @@ export const inactivateAccount = async (accessToken) => {
   return await axios.get(`${baseURL}/auth/inactive`, { headers: { Authorization: `Bearer ${accessToken}` } });
 }
 
+export const retrieveVaccines = async (accessToken, id) => {
+  return await axios.get(`${baseURL}/protocol-animal/list/${id}`, { headers: { Authorization: `Bearer ${accessToken}` } });
+}
+
 export const createPet = async (data) => {
   const config = {
     headers: {
