@@ -1,16 +1,15 @@
+import { useState } from 'react'
+import { Formik } from 'formik'
+import { Redirect } from 'react-router'
+import * as Yup from 'yup'
 import logoFull from '../../assets/images/logoFull.svg'
 import loginImg from '../../assets/images/login-img.svg'
 import { CardWrapper, StyledCard, CustomInput } from './style'
 import { PrimaryButton, SecondaryButton, CustomLink } from '../../utils/theme'
-import { useDispatch } from 'react-redux'
-import { Redirect } from 'react-router'
 import { requestTokenByEmail } from '../../services/api'
-import { useState } from 'react'
 import { CircularProgress } from '@mui/material'
-import { handleUserThunk } from '../../redux/modules/user/thunks'
 import { Grid } from '@material-ui/core'
-import { Formik } from 'formik'
-import * as Yup from 'yup'
+
 
 const LoginForm = () => {
 	const [authenticated, setAuthenticated] = useState(false)
@@ -20,14 +19,10 @@ const LoginForm = () => {
 		},
 		isSubmitting: false,
 		success: false,
-		hasError: false,
-		errorMessage: '',
-		successMessage: ''
+		hasError: false
 	})
 
-	const dispatch = useDispatch()
-
-	const { isSubmitting, success, hasError, errorMessage, successMessage } =
+	const { isSubmitting, success, hasError } =
 		formValues
 
 	const successHandler = () => {
@@ -36,9 +31,7 @@ const LoginForm = () => {
 			isSubmitting: false,
 			success: true,
 			hasError: false,
-			isAuthenticated: true,
-			successMessage:
-				'Usuário logado com sucesso!'
+			isAuthenticated: true
 		})
 	}
 
@@ -47,8 +40,7 @@ const LoginForm = () => {
 			...formValues,
 			isSubmitting: false,
 			success: false,
-			hasError: true,
-			errorMessage: 'Houve um erro com o login'
+			hasError: true
 		})
 		setTimeout(() => {
 			setFormValues({
@@ -57,25 +49,22 @@ const LoginForm = () => {
 				},
 				isSubmitting: false,
 				success: false,
-				hasError: false,
-				errorMessage: '',
-				successMessage: ''
+				hasError: false
 			})
 		}, 5000)
 	}
 
 	const submitForm = formData => {
-
 		const newState = formValues
 		newState.formState = formData
 		setFormValues({ ...newState, isSubmitting: true })
-
 		requestTokenByEmail({ email: formData.email })
-			.then((res) => {
+			.then((response) => {
+				console.log(`${window.location.href}#accessToken=${response.data.token}`)
 				successHandler()
-				dispatch(handleUserThunk(res.data))
 			})
 			.catch((err) => {
+				console.log(err)
 				errorHandler(err)
 			})
 	}
@@ -113,11 +102,11 @@ const LoginForm = () => {
 						{isSubmitting ? (
 							<CircularProgress />
 						) : (
-							<PrimaryButton uppercase type='submit' isHome variant="contained">
+							<PrimaryButton type='submit' isHome variant="contained">
 								Receber link de acesso
 							</PrimaryButton>
 						)}
-						{/* <SecondaryButton uppercase isHome>
+						{/* <SecondaryButton isHome>
 							Criar o perfil do meu pet
 						</SecondaryButton> */}
 					</div>

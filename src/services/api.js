@@ -1,43 +1,42 @@
 import axios from "axios"
 
-const baseURL = "http://3.82.165.166:80/api/v1"
+const baseURL = "http://3.82.165.166/api/v1"
 
 export const isAuthenticated = () => {
-  return window.localStorage.getItem("authorizationToken") !== null
+  return localStorage.getItem("accessToken") !== null
 }
 
 export const token = () => {
-  return window.localStorage.getItem("authorizationToken")
+  return localStorage.getItem("accessToken")
 }
 
 export const requestTokenByEmail = async (email) => {
-  let res = await axios.post(`${baseURL}/code-validation/send-invite`, email)
-  console.log(res, 'aqui')
-  window.localStorage.setItem("authorizationToken", res.data.userInfo.token)
-  window.localStorage.setItem("email", res.data.token)
-  return (
-    res.status === 201 && {
-      data: res.data.token,
-      message: "Login efetuado com sucesso",
-    }
-  );
+  return await axios.post(`${baseURL}/code-validation/send-invite`, email)
 }
 
-export const validateToken = async (token) => {
-  let res = await axios.put(`${baseURL}/code-validation/validate`, token);
-  return res.data;
-};
+export const validateEmailToken = async (token) => {
+  return await axios.post(`${baseURL}/code-validation/validate`, { token: token })
+}
 
-export const requestEditProfile = async (data) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token()}`,
-    },
-  };
-  let res = await axios.put(`${baseURL}/profile`, data, config);
-  return res.data;
-};
+export const retrieveAnimals = async (accessToken) => {
+  return await axios.get(`${baseURL}/animal/my-list`, { headers: { Authorization: `Bearer ${accessToken}` } });
+}
+
+export const retrieveUserInfo = async (accessToken) => {
+  return await axios.get(`${baseURL}/profile/detail`, { headers: { Authorization: `Bearer ${accessToken}` } });
+}
+
+export const updateUserInfo = async (payload, accessToken) => {
+  return await axios.post(`${baseURL}/profile/update`, payload, { headers: { Authorization: `Bearer ${accessToken}` } });
+}
+
+export const inactivateAccount = async (accessToken) => {
+  return await axios.get(`${baseURL}/auth/inactive`, { headers: { Authorization: `Bearer ${accessToken}` } });
+}
+
+export const retrieveVaccines = async (accessToken, id) => {
+  return await axios.get(`${baseURL}/protocol-animal/list/${id}`, { headers: { Authorization: `Bearer ${accessToken}` } });
+}
 
 export const createPet = async (data) => {
   const config = {
@@ -60,3 +59,8 @@ export const requestEditPet = async (id, data) => {
   let res = await axios.put(`${baseURL}/pets/${id}`, data, config);
   return res;
 };
+
+export const logoutUser = () => {
+  localStorage.clear()
+  location.href = '/login'
+}

@@ -3,7 +3,7 @@
 import avatar from './assets/images/UserProfile/ciro.png'
 
 export const mockData = {
-	userInfo: { 
+	userInfo: {
 		id: 1515,
 		token: 'TOKENEXEMPLOTESTEloORemIPsuummSSOSO23843423**--23nfkd',
 		username: 'cirobottini',

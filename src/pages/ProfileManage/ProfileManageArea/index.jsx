@@ -1,20 +1,17 @@
-import { Card, CardContent, IconButton, Modal, Typography } from "@mui/material"
-import { ProfileManageContent } from "./style"
-import TextField from '@mui/material/TextField';
-import { AttachFile } from "@mui/icons-material";
 import { useState } from 'react'
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Box from '@mui/material/Box';
-import { MenuItem } from '@material-ui/core'
-import { SaveButton, DisableButton, DisableAccount, CancelButton, ConfirmButton, ButtonControl } from './style'
-import { useHistory } from "react-router";
-import { useDispatch } from "react-redux"
-import { handleUserThunk } from "../../../redux/modules/user/thunks";
 import { Formik } from 'formik'
 import * as Yup from 'yup'
+import { useHistory } from "react-router";
+import { useDispatch } from "react-redux"
 import InputMask from "react-input-mask";
+import { inactivateAccount, logoutUser, token, updateUserInfo } from "../../../services/api";
+import { handleUserThunk } from "../../../redux/modules/user/thunks";
+import { Card, CardContent, IconButton, Modal, Typography, TextField, InputLabel, FormControl, Select, Box } from "@mui/material"
+import { AttachFile } from "@mui/icons-material";
+import { MenuItem } from '@material-ui/core'
+import { SaveButton, DisableButton, DisableAccount, CancelButton, ConfirmButton, ButtonControl, ProfileManageContent } from './style'
+import { CircularProgress } from '@material-ui/core';
+
 
 const style = {
 	position: 'absolute',
@@ -27,24 +24,21 @@ const style = {
 	p: 4,
 };
 
-const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
+const ProfileManageArea = ({ id, username, first_name, last_name, cellphone, email, born, photoName, profile }) => {
 	const dispatch = useDispatch()
-	const history = useHistory();
-	const [profile, setProfile] = useState('Tutor')
+	const history = useHistory()
+
 	const [modalOpen, setModalOpen] = useState(false)
+	const [isSubmiting, setSubmiting] = useState(false)
+	const [hasError, setHasError] = useState(false)
+
 	const [formValues, setFormValues] = useState({
-		formState: {
-			name: 'Ciro Bottini',
-			email: 'c.bot@email.com',
-			cellphone: '(31) 9 9955-4452',
-			born: '23/08/1976',
-			photoName: 'img_ciro.jpg'
-		},
-		isSubmitting: false,
-		success: false,
-		hasError: false,
-		errorMessage: '',
-		successMessage: ''
+		name: `${first_name} ${last_name}`,
+		email: email,
+		cellphone: cellphone,
+		born: born,
+		photoName: photoName,
+		profile: profile
 	})
 
 	const toggleModal = () => setModalOpen(!modalOpen)
@@ -60,17 +54,49 @@ const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 	}
 
 	const disableAccount = () => {
-		window.localStorage.clear();
-		dispatch(handleUserThunk([]));
-		history.push('/login')
+		inactivateAccount(token())
+			.then(res => {
+				console.log(res)
+				logoutUser()
+			})
+			.catch(err => {
+				console.log(err)
+			})
 	}
-
-	const { isSubmitting, success, hasError, errorMessage, successMessage } =
-		formValues
 
 	const submitForm = formData => {
-		console.log(formData)
+		setSubmiting(true)
+		let payload = {
+			"id": id,
+			"username": username,
+			"first_name": formData.name.split(' ')[0],
+			"last_name": formData.name
+				.split(' ')
+				.slice(1, formData.name.length - 1)
+				.join(' ') || '',
+			"email": formData.email,
+			"is_staff": false,
+			"is_active": true,
+			"phone": formData.cellphone,
+			"type": "N",
+			"inactive_cause": null
+		}
+
+		updateUserInfo(payload, token())
+			.then(res => {
+				console.log(res)
+				// PRECISA ATUALIZAR O REDUX COM OS DADOS ATUALIZADOS DO USUÁRIO
+				dispatch(handleUserThunk(payload))
+				setSubmiting(false)
+			})
+			.catch(err => {
+				dispatch(handleUserThunk(payload))
+				console.log(err)
+				setHasError(true)
+				setSubmiting(false)
+			})
 	}
+
 
 	const renderForm = ({
 		values,
@@ -126,14 +152,16 @@ const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 							/>
 							<Box sx={{ width: '100%' }}>
 								<FormControl fullWidth>
-									<InputLabel id="demo-simple-select-label">Perfil</InputLabel>
+									<InputLabel id="profile">Perfil</InputLabel>
 									<Select
-										labelId="demo-simple-select-label"
-										id="demo-simple-select"
+										id="profile"
+										name="profile"
 										defaultValue='Tutor'
-										value={profile}
+										value={values.profile}
 										label="Perfil"
-										onChange={handleSelect}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										touched={touched.profile}
 									>
 										<MenuItem value={'Tutor'}>Tutor</MenuItem>
 										<MenuItem value={'Amigo'}>Amigo</MenuItem>
@@ -203,9 +231,11 @@ const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 							<div style={{ content: '', width: '100%' }}></div>
 						</div>
 						<div className="row-submit">
-							<SaveButton type='submit'>
-								SALVAR
-							</SaveButton>
+							{isSubmiting ? <CircularProgress /> : (
+								<SaveButton type='submit'>
+									SALVAR
+								</SaveButton>
+							)}
 						</div>
 					</div>
 				</form>
@@ -233,10 +263,10 @@ const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 							Explicação sobre dados ao desativar.
 						</Typography>
 						<ButtonControl>
-							<DisableButton style={{ marginRight: '15px' }} uppercase onClick={disableAccount}>
+							<DisableButton style={{ marginRight: '15px' }} onClick={disableAccount}>
 								Tenho certeza
 							</DisableButton>
-							<SaveButton uppercase onClick={toggleModal}>
+							<SaveButton onClick={toggleModal}>
 								Cancelar
 							</SaveButton>
 						</ButtonControl>
@@ -252,7 +282,7 @@ const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 						<Formik
 							validateOnChange
 							validateOnBlur
-							initialValues={formValues.formState}
+							initialValues={formValues}
 							// enableReinitialize
 							onSubmit={submitForm}
 							render={renderForm}
@@ -275,7 +305,7 @@ const ProfileManageArea = ({ cellphone, email, born, photoName }) => {
 				</CardContent>
 			</Card>
 			<DisableAccount>
-				<DisableButton upperCase onClick={toggleModal}>
+				<DisableButton onClick={toggleModal}>
 					Desativar Minha Conta
 				</DisableButton>
 			</DisableAccount>

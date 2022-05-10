@@ -16,7 +16,7 @@ const PetInformation = ({ sex, weight, breed, age }) => {
 					RAÇA
 				</span>
 				<span className="info-content">
-					{breed}
+					{breed.name}
 				</span>
 			</div>
 			<div className="info weight">

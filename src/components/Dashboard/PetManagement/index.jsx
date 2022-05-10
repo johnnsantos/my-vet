@@ -1,14 +1,13 @@
-import { Grid } from "@mui/material"
+import { useEffect, useState } from "react"
+import { useHistory } from "react-router"
+import { useSelector } from "react-redux"
 import { PrimaryButton } from "../../../utils/theme"
-import { AddCircle } from "@mui/icons-material"
 import { PetControl, StyledGrid } from './style'
-import { useState } from 'react'
-import { Modal, Box, Typography } from "@mui/material"
 import PetCard from "../PetCard"
 import EmptyBanner from "../EmptyBanner"
-import { useEffect } from "react"
-import { useHistory } from "react-router"
-import { Container } from "@material-ui/core"
+import { Modal, Box, Typography, Grid } from "@mui/material"
+import { Container, CircularProgress } from "@material-ui/core"
+import { AddCircle } from "@mui/icons-material"
 
 const style = {
 	position: 'absolute',
@@ -22,12 +21,12 @@ const style = {
 	p: 4,
 };
 
-const PetManagement = (props) => {
+const PetManagement = ({ loading, animalsList }) => {
 	const history = useHistory()
 	const [open, setOpen] = useState(false)
+
 	//const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
-	const [pets, setPets] = useState([])
 
 	const handlePetPage = (id) => {
 		history.push(`/pet/${id}`)
@@ -37,10 +36,23 @@ const PetManagement = (props) => {
 		window.Intercom('show');
 	}
 
-	useEffect(() => {
-		let { userPets } = JSON.parse(localStorage.getItem('userInfo'))
-		setPets(userPets)
-	}, [])
+
+	if (loading) {
+		return (
+			<Grid
+				container
+				spacing={0}
+				direction="column"
+				alignItems="center"
+				justifyContent="center"
+				style={{ minHeight: '100vh' }}
+			>
+				<Grid item xs={12} sm={12} md={12} lg={12} >
+					<CircularProgress />
+				</Grid>
+			</Grid>
+		)
+	}
 
 	return (
 		<Container>
@@ -67,17 +79,17 @@ const PetManagement = (props) => {
 					</Box>
 				</Modal>
 				<PetControl>
-					<PrimaryButton uppercase onClick={ handleOpen } startIcon={<AddCircle />}>
+					<PrimaryButton onClick={handleOpen} startIcon={<AddCircle />}>
 						Adicionar novo pet
 					</PrimaryButton>
 				</PetControl>
-				{pets.length === 0 ? (
+				{animalsList.length === 0 ? (
 					<EmptyBanner />
 				) : (
 					<>
-						{pets.map((pet) => (
+						{animalsList.map((pet) => (
 							<Grid key={pet.id} item xs={12} sm={12} md={6} lg={4} onClick={() => handlePetPage(pet.id)}>
-								<PetCard {...pet} />
+								<PetCard key={pet.id} {...pet} />
 							</Grid>
 						))}
 					</>

@@ -3,8 +3,10 @@ import { Create } from "@mui/icons-material"
 import { EditArea, StyledChip } from './style'
 import PetHeader from "./PetHeader"
 import PetInformation from "./PetInformation"
+import { useEffect } from "react"
 
 const PetCard = (props) => {
+
 	return (
 		<Card elevation={2} sx={{ mb: 2, cursor: props.petpage ? 'default' : 'pointer' }}>
 			{props.petpage ? null : (
